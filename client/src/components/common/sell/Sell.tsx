@@ -2,11 +2,18 @@ import React from "react";
 import { Text, View } from "react-native";
 
 import styles from "./sell.style";
+import { getPercentReduce } from "../../../utils/common";
 
-const Sell: React.FC = () => {
+interface IProps {
+  price: number;
+  originalPrice: number;
+}
+const Sell: React.FC<IProps> = ({ price, originalPrice }) => {
+  if (originalPrice === 0) return null;
+
   return (
     <View style={styles.productSell}>
-      <Text style={styles.productSellText}>40%</Text>
+      <Text style={styles.productSellText}>{getPercentReduce(price, originalPrice)}%</Text>
       <Text style={[styles.productSellText, { color: "#fff", textTransform: "uppercase" }]}>
         Giảm
       </Text>

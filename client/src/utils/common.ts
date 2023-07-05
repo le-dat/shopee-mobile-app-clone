@@ -7,6 +7,6 @@ export const calculateMoneyInVietnamese = (amount: number): string => {
   return amount.toLocaleString("vi-VN", formatCurrency);
 };
 
-export const getPercentReduce = (price: number, originPrice: number) => {
-  return Math.round((1 - price / originPrice) * 100);
+export const getPercentReduce = (price: number, originalPrice: number) => {
+  return Math.round((1 - price / originalPrice) * 100);
 };

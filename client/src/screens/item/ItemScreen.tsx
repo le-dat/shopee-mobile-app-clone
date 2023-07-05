@@ -1,4 +1,4 @@
-import { useLinkTo } from "@react-navigation/native";
+import { useLinkTo, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { ScrollView } from "native-base";
 import React, { useState } from "react";
@@ -19,8 +19,6 @@ import {
   ICON_MESSAGE,
   ICON_SHARE,
   LINKS,
-  LIST_MENU,
-  LIST_ITEM_BEAUTIFUL,
 } from "../../constants";
 import useIsScroll from "../../hooks/useIsScroll";
 import styles from "./itemscreen.style";
@@ -31,6 +29,7 @@ interface IProps {
 }
 const ItemScreen: React.FC<IProps> = ({ navigation }) => {
   const linkTo = useLinkTo();
+  const router = useRoute();
   const [isHeart, setIsHeart] = useState<boolean>(false);
   const { isScroll, handleScroll } = useIsScroll();
 
@@ -62,7 +61,7 @@ const ItemScreen: React.FC<IProps> = ({ navigation }) => {
               Kính mát WE flower Kính mát WE flowerKính mát WE flowerKính mát WE flowerKính mát WE
               flowerKính mát WE flowerKính mát WE flower
             </Text>
-            <Sell />
+            {/* <Sell /> */}
           </View>
 
           <View style={styles.row}>
@@ -105,9 +104,9 @@ const ItemScreen: React.FC<IProps> = ({ navigation }) => {
             showsHorizontalScrollIndicator={false}
             style={{ marginTop: 20, marginBottom: 150 }}
           >
-            {LIST_ITEM_BEAUTIFUL.map(
-              (item, index) => index < 10 && <Card key={index} item={item} border />
-            )}
+            {/* {LIST_ITEM_BEAUTIFUL.map(
+              (item, index) => <Card key={index} item={item} border />
+            )} */}
           </ScrollView>
         </View>
       </ScrollView>

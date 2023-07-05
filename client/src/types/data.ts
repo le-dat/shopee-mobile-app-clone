@@ -2,22 +2,27 @@ export interface ResponseIProps<T> {
   data: {
     id: string;
     attributes: T;
+  };
+}
+export interface ResponseArrayIProps<T> {
+  data: {
+    id: string;
+    attributes: T;
   }[];
 }
-
 export interface ItemIProps {
   name: string;
   price: number;
-  originPrice: number;
+  original_price: number;
   sell_number: number;
   slug: string;
   description?: string;
 
-  color: ResponseIProps<ColorIProps>;
+  color: ResponseArrayIProps<ColorIProps>;
   thumbnail: ResponseIProps<ThumbnailIProps>;
-  images: ResponseIProps<ImageIProps>;
-  categories: ResponseIProps<CategoryIProps>;
-  locations: ResponseIProps<LocationIProps>;
+  images: ResponseArrayIProps<ImageIProps>;
+  categories: ResponseArrayIProps<CategoryIProps>;
+  locations: ResponseArrayIProps<LocationIProps>;
 }
 
 export interface ColorIProps {

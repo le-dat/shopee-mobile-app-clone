@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Image, ScrollView, TouchableOpacity } from "react-native";
-import { View } from "react-native";
-import { LIST_MENU } from "../../../constants";
+import { ScrollView, View } from "react-native";
+
 import styles from "./itemCarousel.style";
 
 interface IProps {
@@ -20,19 +19,19 @@ const ItemCarousel: React.FC<IProps> = () => {
         /> */}
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryList}>
-        {LIST_MENU.map((item, index) => (
+        {/* {LIST_MENU.map((item, index) => (
           <TouchableOpacity
             key={index}
             style={styles.categoryItem(active === item.id)}
             onPress={() => setActive(item.id)}
           >
-            {/* <Image
+            <Image
               source={require(item.image)}
               style={styles.categoryItemImage}
               accessibilityLabel={`category-${item.id}`}
-            /> */}
+            />
           </TouchableOpacity>
-        ))}
+        ))} */}
       </ScrollView>
     </View>
   );
