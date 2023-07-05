@@ -1,14 +1,12 @@
+export interface StrapiIProps<T> {
+  id: number;
+  attributes: T;
+}
 export interface ResponseIProps<T> {
-  data: {
-    id: string;
-    attributes: T;
-  };
+  data: StrapiIProps<T>;
 }
 export interface ResponseArrayIProps<T> {
-  data: {
-    id: string;
-    attributes: T;
-  }[];
+  data: StrapiIProps<T>[];
 }
 export interface ItemIProps {
   name: string;
@@ -20,7 +18,7 @@ export interface ItemIProps {
 
   color: ResponseArrayIProps<ColorIProps>;
   thumbnail: ResponseIProps<ThumbnailIProps>;
-  images: ResponseArrayIProps<ImageIProps>;
+  image: ResponseArrayIProps<ImageIProps>;
   categories: ResponseArrayIProps<CategoryIProps>;
   locations: ResponseArrayIProps<LocationIProps>;
 }
@@ -40,6 +38,7 @@ export interface ThumbnailIProps {
 export interface CategoryIProps {
   name: string;
   slug: string;
+  image: ResponseIProps<ImageIProps>;
 }
 export interface LocationIProps {
   name: string;

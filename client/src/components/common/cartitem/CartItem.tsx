@@ -1,36 +1,46 @@
-import { useNavigation } from "@react-navigation/native";
+import { useLinkTo, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, StyleProp, Text, TouchableOpacity, View, ViewStyle } from "react-native";
 
 import { LINKS } from "../../../constants";
 import { ItemIProps } from "../../../types/data";
-import Sell from "../sell/Sell";
-import styles from "./card.style";
+import styles from "./cartitem.style";
 import { formatCurrencyVietnam } from "../../../utils/common";
+import useFetch from "../../../hooks/useFetch";
 
 interface IProps {
+  id: number;
   item: ItemIProps;
-  border?: boolean;
   style?: StyleProp<ViewStyle>;
 }
-
-const Card: React.FC<IProps> = ({ item, border, style }) => {
+const CartItem: React.FC<IProps> = ({ id, item, style }) => {
   const navigation = useNavigation<any>();
 
+  const store = [2, 3, 4, 5];
+  const query = store.map((id) => `&filters[id][$in][0]=${store[id]}`).join("");
+
+  const {
+    data: dataDetail,
+    isLoading: isLoadingDetail,
+    error: errorDetail,
+    refetch: refetchDetail,
+  } = useFetch({
+    endpoint: `products?populate=*${query}`,
+  });
+
   const handleNavigateToItem = () => {
-    navigation.navigate("Item", { slug: item?.slug });
+    // navigation.navigate("Category", { slug: category?.slug });
   };
 
   return (
     <TouchableOpacity onPress={() => handleNavigateToItem()} style={[styles.wrapper, style]}>
-      <View style={styles.productItem(border)}>
-        <View style={styles.productSell}>
-          <Sell price={item?.price} originalPrice={item?.original_price} />
-        </View>
-        <View style={styles.productItemImageWrapper}>
+      <View>
+        <View style={styles.imageWrapper}>
           <Image
             source={{ uri: item?.thumbnail?.data?.attributes?.url }}
-            style={styles.productItemImage}
+            resizeMode="contain"
+            style={styles.image}
+            accessibilityLabel={`category-${id}`}
           />
         </View>
 
@@ -43,9 +53,6 @@ const Card: React.FC<IProps> = ({ item, border, style }) => {
             <Text numberOfLines={1} style={styles.productItemPrice}>
               {formatCurrencyVietnam(item?.price)}
             </Text>
-            <Text numberOfLines={1} style={styles.productItemSellNumber}>
-              {item?.sell_number}
-            </Text>
           </View>
         </View>
       </View>
@@ -53,4 +60,4 @@ const Card: React.FC<IProps> = ({ item, border, style }) => {
   );
 };
 
-export default Card;
+export default CartItem;

@@ -11,7 +11,13 @@ const styles = StyleSheet.create<any>({
     justifyContent: "center",
     aspectRatio: 1,
   },
+  image: {
+    width: "100%",
+    height: "100%",
+    flex: 1,
+  },
   categoryList: {
+    padding: 10,
     flexDirection: "row",
   },
   categoryItem: (active: boolean) => ({
@@ -21,8 +27,8 @@ const styles = StyleSheet.create<any>({
     borderColor: active ? COLORS.primary : "transparent",
   }),
   categoryItemImage: {
-    aspectRatio: 1,
     width: "100%",
+    height: "100%",
     flex: 1,
   },
 });

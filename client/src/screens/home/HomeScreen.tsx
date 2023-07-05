@@ -1,25 +1,46 @@
 import { useLinkTo } from "@react-navigation/native";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { Image, ScrollView, View } from "react-native";
 
+import Spinner from "react-native-loading-spinner-overlay";
 import MyCustomIcon from "../../components/common/MyCustomIcon";
 import Search from "../../components/common/Search";
+import Card from "../../components/common/card/Card";
+import TwoRowScrollView from "../../components/common/carousel/TwoColumnScrollView";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import PaddingWrapper from "../../components/wrapper/PaddingWrapper";
-import { ICON_CART, ICON_MESSAGE, LINKS } from "../../constants";
+import SwiperWrapper from "../../components/wrapper/SwiperWrapper";
+import { ICON_CART, ICON_MESSAGE, IMAGE_SWIPER, LINKS } from "../../constants";
 import useFetch from "../../hooks/useFetch";
 import useIsScroll from "../../hooks/useIsScroll";
 import styles from "./homescreen.style";
-import Card from "../../components/common/card/Card";
+import Error from "../../components/common/Error";
 
 const HomeScreen: React.FC = () => {
   const linkTo = useLinkTo();
 
   const { isScroll, handleScroll } = useIsScroll();
 
-  const { data, isLoading, error, refetch } = useFetch({ endpoint: "products" });
-  console.log(data);
+  const {
+    data: dataItem,
+    isLoading: isLoadingItem,
+    error: errorItem,
+    refetch: refetchItem,
+  } = useFetch({ endpoint: "products?populate=*" });
+
+  const {
+    data: dataCategory,
+    isLoading: isLoadingCategory,
+    error: errorCategory,
+    refetch: refetchCategory,
+  } = useFetch({ endpoint: "categories?populate=*" });
+
+  if (isLoadingItem) return <Spinner visible={isLoadingItem} textContent={"Loading..."} />;
+  if (isLoadingCategory) return <Spinner visible={isLoadingCategory} textContent={"Loading..."} />;
+
+  if (errorItem) return <Error handlePress={refetchItem} />;
+  if (errorCategory) return <Error handlePress={refetchCategory} />;
 
   return (
     <FontWrapper>
@@ -32,24 +53,26 @@ const HomeScreen: React.FC = () => {
       </HeaderWrapper>
 
       <ScrollView onScroll={handleScroll} scrollEventThrottle={16}>
-        {/* <SwiperWrapper>
-          {LIST_SWIPER.map((item, index) => (
+        <SwiperWrapper>
+          {IMAGE_SWIPER.map((item, index) => (
             <Image
               key={index}
-              source={require(item.image)}
+              source={item.image}
               resizeMode="contain"
               style={styles.swiperItem}
               accessibilityLabel={`swiper-${item.id}`}
             />
           ))}
-        </SwiperWrapper> */}
+        </SwiperWrapper>
 
-        <PaddingWrapper>{/* <TwoRowScrollView data={LIST_MENU} /> */}</PaddingWrapper>
+        <PaddingWrapper>
+          <TwoRowScrollView data={dataCategory?.data} />
+        </PaddingWrapper>
 
         <PaddingWrapper style={{ marginBottom: 150 }}>
           <View style={styles.productList}>
-            {data.map((item, index) => (
-              <Card key={index} id={item.id} item={item.attributes} />
+            {dataItem?.data?.map((item: any, index: number) => (
+              <Card key={index} item={item.attributes} />
             ))}
           </View>
         </PaddingWrapper>

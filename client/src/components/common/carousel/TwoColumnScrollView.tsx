@@ -1,31 +1,41 @@
 import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
-import { DataIProps } from "../../../types/common";
-import styles from "./twocolumnscreen.style";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { CategoryIProps, ResponseArrayIProps } from "../../../types/data";
+import styles from "./twocolumnscrollview.style";
+import { useNavigation } from "@react-navigation/native";
 
-interface IProps {
-  data: DataIProps[];
-}
-const TwoRowScrollView: React.FC<IProps> = ({ data }) => {
-  const renderItem = (item: DataIProps, index: number) => {
+const TwoRowScrollView: React.FC<ResponseArrayIProps<CategoryIProps>> = ({ data }) => {
+  const navigation = useNavigation<any>();
+
+  const handleNavigateToItem = (slug: string) => {
+    navigation.navigate("Category", { slug });
+  };
+
+  const renderItem = (item: { attributes: CategoryIProps }, index: number) => {
     return (
-      <View key={index} style={styles.categoryItem}>
-        {/* <Image
-          source={require(item.image)}
+      <TouchableOpacity
+        key={index}
+        style={styles.categoryItem}
+        onPress={() => handleNavigateToItem(item?.attributes?.slug)}
+      >
+        <Image
+          source={{ uri: item?.attributes?.image?.data?.attributes?.url }}
           resizeMode="contain"
           style={styles.categoryItemImage}
-          accessibilityLabel={`category-${item.id}`}
-        /> */}
-        <Text style={styles.categoryItemText}>{item.name}</Text>
-      </View>
+        />
+        <Text style={styles.categoryItemText}>{item?.attributes?.name}</Text>
+      </TouchableOpacity>
     );
   };
 
   const renderItems = () => {
     const items = [];
-    for (let i = 0; i < data.length; i += 2) {
-      const item1 = data[i];
-      const item2 = data[i + 1];
+    // example: data.length > 10
+    const newData = [...data, ...data];
+
+    for (let i = 0; i < newData.length; i += 2) {
+      const item1 = newData[i];
+      const item2 = newData[i + 1];
 
       items.push(
         <View key={i} style={styles.column}>

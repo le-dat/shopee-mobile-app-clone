@@ -5,7 +5,6 @@ const styles = StyleSheet.create<any>({
   wrapper: {
     display: "flex",
     width: "50%",
-    maxWidth: 200,
     paddingHorizontal: 5,
     justifyContent: "center",
   },
@@ -32,7 +31,7 @@ const styles = StyleSheet.create<any>({
   },
   productItemImage: {
     width: "100%",
-    height: "100%",
+    aspectRadio: 1,
   },
   productItemText: {
     marginBottom: 20,

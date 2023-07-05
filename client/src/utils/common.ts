@@ -2,7 +2,7 @@ const formatCurrency = {
   style: "currency",
   currency: "VND",
 };
-export const calculateMoneyInVietnamese = (amount: number): string => {
+export const formatCurrencyVietnam = (amount: number): string => {
   amount = amount * 1000;
   return amount.toLocaleString("vi-VN", formatCurrency);
 };
