@@ -31,7 +31,8 @@ const createManyProduct = async (req, res) => {
 // Get all products
 const getAllProduct = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate("categories", "id name").exec();
+
     res.status(200).json({ products, message: "Get all product successfully" });
   } catch (error) {
     console.error(error);

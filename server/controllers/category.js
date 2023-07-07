@@ -33,7 +33,10 @@ const createManyCategory = async (req, res) => {
 // Get all categories
 const getCategories = async (req, res) => {
   try {
-    const categories = await Category.find();
+    const categories = await Category.find()
+      .populate({ path: "products", select: "-categories -__v" })
+      .exec();
+
     res.status(200).json({ categories });
   } catch (error) {
     console.error(error);
