@@ -1,12 +1,11 @@
-import { useLinkTo, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, StyleProp, Text, TouchableOpacity, View, ViewStyle } from "react-native";
 
-import { LINKS } from "../../../constants";
-import { ItemIProps } from "../../../types/data";
-import styles from "./cartitem.style";
-import { formatCurrencyVietnam } from "../../../utils/common";
 import useFetch from "../../../hooks/useFetch";
+import { ItemIProps } from "../../../types/data";
+import { formatCurrencyVietnam } from "../../../utils/common";
+import styles from "./cartitem.style";
 
 interface IProps {
   id: number;

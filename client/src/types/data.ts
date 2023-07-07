@@ -16,6 +16,7 @@ export interface ItemIProps {
   slug: string;
   description?: string;
 
+  size: SizeIProps[];
   color: ResponseArrayIProps<ColorIProps>;
   thumbnail: ResponseIProps<ThumbnailIProps>;
   image: ResponseArrayIProps<ImageIProps>;
@@ -23,6 +24,10 @@ export interface ItemIProps {
   locations: ResponseArrayIProps<LocationIProps>;
 }
 
+export interface SizeIProps {
+  name: string;
+  enable: boolean;
+}
 export interface ColorIProps {
   name: string;
   enable: boolean;

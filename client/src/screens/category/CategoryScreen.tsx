@@ -1,4 +1,4 @@
-import { useLinkTo, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { ScrollView } from "native-base";
 import React from "react";
@@ -8,13 +8,13 @@ import Spinner from "react-native-loading-spinner-overlay";
 import Error from "../../components/common/Error";
 import MyCustomIcon from "../../components/common/MyCustomIcon";
 import Search from "../../components/common/Search";
+import Card from "../../components/common/card/Card";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
-import { COLORS, ICON_BACK, ICON_CART, LINKS } from "../../constants";
+import PaddingWrapper from "../../components/wrapper/PaddingWrapper";
+import { COLORS, ICON_BACK, ICON_CART, ROUTES } from "../../constants";
 import useFetch from "../../hooks/useFetch";
 import useIsScroll from "../../hooks/useIsScroll";
-import PaddingWrapper from "../../components/wrapper/PaddingWrapper";
-import Card from "../../components/common/card/Card";
 import styles from "./categoryscreen.style";
 
 interface IProps {
@@ -26,7 +26,6 @@ interface RouteParams {
 }
 
 const CategoryScreen: React.FC<IProps> = ({ navigation }) => {
-  const linkTo = useLinkTo();
   const router = useRoute();
   const { slug } = router.params as RouteParams;
   const { isScroll, handleScroll } = useIsScroll();
@@ -64,7 +63,7 @@ const CategoryScreen: React.FC<IProps> = ({ navigation }) => {
 
         <Search placeholder="Tìm kiếm trong danh mục" />
         <View style={{ flexDirection: "row" }}>
-          <MyCustomIcon {...ICON_CART} handlePress={() => linkTo(LINKS.cart)} />
+          <MyCustomIcon {...ICON_CART} handlePress={() => navigation.navigate(ROUTES.cart)} />
           {/* <ButtonThreeDot /> */}
         </View>
       </HeaderWrapper>

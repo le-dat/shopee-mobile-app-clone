@@ -44,7 +44,7 @@ const useFetch = ({ endpoint = "", method = "GET", query = {} }: IProps) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [endpoint]);
 
   const refetch = () => {
     setIsLoading(true);

@@ -4,6 +4,9 @@ import { COLORS, FONTS } from "../../constants";
 const styles = StyleSheet.create({
   wrapper: {},
   container: {
+    backgroundColor: COLORS.bgPrimary,
+  },
+  detail: {
     padding: 10,
     marginVertical: 10,
     backgroundColor: COLORS.white,

@@ -1,4 +1,4 @@
-import { useLinkTo, useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { ScrollView } from "native-base";
 import React, { useState } from "react";
@@ -8,6 +8,8 @@ import Spinner from "react-native-loading-spinner-overlay";
 import Error from "../../components/common/Error";
 import MyCustomIcon from "../../components/common/MyCustomIcon";
 import Search from "../../components/common/Search";
+import BottomAction from "../../components/common/bottom/BottomAction";
+import MyCustomSheet from "../../components/common/bottom/MyCustomSheet";
 import Card from "../../components/common/card/Card";
 import ItemCarousel from "../../components/common/carousel/ItemCarousel";
 import Sell from "../../components/common/sell/Sell";
@@ -20,13 +22,12 @@ import {
   ICON_HEART,
   ICON_MESSAGE,
   ICON_SHARE,
-  LINKS,
+  ROUTES,
 } from "../../constants";
 import useFetch from "../../hooks/useFetch";
 import useIsScroll from "../../hooks/useIsScroll";
 import { formatCurrencyVietnam } from "../../utils/common";
 import styles from "./itemscreen.style";
-import BottomAction from "../../components/common/BottomAction";
 
 interface IProps {
   navigation: StackNavigationProp<any, any>;
@@ -37,9 +38,7 @@ interface RouteParams {
 }
 
 const ItemScreen: React.FC<IProps> = ({ navigation }) => {
-  const linkTo = useLinkTo();
   const router = useRoute();
-  const nav = useNavigation<any>();
   const { slug } = router.params as RouteParams;
   const [isHeart, setIsHeart] = useState<boolean>(false);
   const { isScroll, handleScroll } = useIsScroll();
@@ -71,7 +70,7 @@ const ItemScreen: React.FC<IProps> = ({ navigation }) => {
   const category = item?.categories?.data?.[0]?.attributes;
 
   const handleNavigateToCategory = () => {
-    nav.navigate("Category", { slug: category?.slug });
+    navigation.navigate(ROUTES.category, { slug: category?.slug });
   };
 
   return (
@@ -82,20 +81,16 @@ const ItemScreen: React.FC<IProps> = ({ navigation }) => {
         <Search placeholder={category?.name} />
         <View style={{ flexDirection: "row" }}>
           <MyCustomIcon {...ICON_SHARE} handlePress={() => console.log("ICON_SHARE")} />
-          <MyCustomIcon {...ICON_CART} handlePress={() => linkTo(LINKS.cart)} />
+          <MyCustomIcon {...ICON_CART} handlePress={() => navigation.navigate(ROUTES.cart)} />
           {/* <ButtonThreeDot /> */}
         </View>
       </HeaderWrapper>
 
-      <ScrollView
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
-        style={{ backgroundColor: COLORS.bgPrimary }}
-      >
+      <ScrollView onScroll={handleScroll} scrollEventThrottle={16} style={styles.container}>
         {/* image */}
         <ItemCarousel data={item?.image} />
         {/* detail */}
-        <View style={styles.container}>
+        <View style={styles.detail}>
           <View style={[styles.row]}>
             <Text numberOfLines={2} style={styles.title}>
               {item?.name}
@@ -124,7 +119,7 @@ const ItemScreen: React.FC<IProps> = ({ navigation }) => {
               />
               <MyCustomIcon
                 {...ICON_MESSAGE}
-                handlePress={() => linkTo(LINKS.message)}
+                handlePress={() => navigation.navigate(ROUTES.message)}
                 color={COLORS.text}
               />
             </View>
@@ -144,7 +139,7 @@ const ItemScreen: React.FC<IProps> = ({ navigation }) => {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            style={{ marginTop: 20, marginBottom: 150 }}
+            style={{ marginTop: 20, marginBottom: 200 }}
           >
             {dataRelative?.data?.map((item: any, index: number) => (
               <Card key={`card-${index}`} item={item?.attributes} border />
@@ -153,7 +148,8 @@ const ItemScreen: React.FC<IProps> = ({ navigation }) => {
         </View>
       </ScrollView>
 
-      <BottomAction id={item?.id} />
+      <BottomAction />
+      <MyCustomSheet item={item} />
     </FontWrapper>
   );
 };

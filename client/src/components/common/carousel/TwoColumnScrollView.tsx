@@ -3,12 +3,13 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { CategoryIProps, ResponseArrayIProps } from "../../../types/data";
 import styles from "./twocolumnscrollview.style";
 import { useNavigation } from "@react-navigation/native";
+import { ROUTES } from "../../../constants";
 
 const TwoRowScrollView: React.FC<ResponseArrayIProps<CategoryIProps>> = ({ data }) => {
   const navigation = useNavigation<any>();
 
   const handleNavigateToItem = (slug: string) => {
-    navigation.navigate("Category", { slug });
+    navigation.navigate(ROUTES.cart, { slug });
   };
 
   const renderItem = (item: { attributes: CategoryIProps }, index: number) => {

@@ -3,19 +3,23 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { NativeBaseProvider } from "native-base";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Provider } from "react-redux";
 
+import { store } from "./src/redux/store";
 import Routes from "./src/routes";
 
 const App: React.FC = () => {
   return (
-    <SafeAreaProvider>
+    <Provider store={store}>
       <NativeBaseProvider>
         <NavigationContainer>
-          <Routes />
-          <StatusBar style="auto" />
+          <SafeAreaProvider style={{ flex: 1 }}>
+            <Routes />
+            <StatusBar style="auto" />
+          </SafeAreaProvider>
         </NavigationContainer>
       </NativeBaseProvider>
-    </SafeAreaProvider>
+    </Provider>
   );
 };
 export default App;

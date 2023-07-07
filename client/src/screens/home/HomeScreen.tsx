@@ -1,8 +1,9 @@
-import { useLinkTo } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, ScrollView, View } from "react-native";
-
 import Spinner from "react-native-loading-spinner-overlay";
+
+import Error from "../../components/common/Error";
 import MyCustomIcon from "../../components/common/MyCustomIcon";
 import Search from "../../components/common/Search";
 import Card from "../../components/common/card/Card";
@@ -11,14 +12,14 @@ import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import PaddingWrapper from "../../components/wrapper/PaddingWrapper";
 import SwiperWrapper from "../../components/wrapper/SwiperWrapper";
-import { ICON_CART, ICON_MESSAGE, IMAGE_SWIPER, LINKS } from "../../constants";
+import { ICON_MESSAGE, IMAGE_SWIPER, ROUTES } from "../../constants";
 import useFetch from "../../hooks/useFetch";
 import useIsScroll from "../../hooks/useIsScroll";
 import styles from "./homescreen.style";
-import Error from "../../components/common/Error";
+import ButtonCart from "../../components/common/ButtonCart";
 
 const HomeScreen: React.FC = () => {
-  const linkTo = useLinkTo();
+  const navigation = useNavigation<any>();
 
   const { isScroll, handleScroll } = useIsScroll();
 
@@ -47,8 +48,8 @@ const HomeScreen: React.FC = () => {
       <HeaderWrapper isScroll={isScroll}>
         <Search />
         <View style={{ flexDirection: "row" }}>
-          <MyCustomIcon {...ICON_CART} handlePress={() => linkTo(LINKS.cart)} />
-          <MyCustomIcon {...ICON_MESSAGE} handlePress={() => linkTo(LINKS.message)} />
+          <ButtonCart />
+          <MyCustomIcon {...ICON_MESSAGE} handlePress={() => navigation.navigate(ROUTES.message)} />
         </View>
       </HeaderWrapper>
 

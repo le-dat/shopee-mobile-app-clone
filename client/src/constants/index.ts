@@ -24,14 +24,14 @@ export const TABS = {
   notify: "Thông báo",
   personal: "Tôi",
 };
-export const LINKS = {
-  home: "/Home",
-  item: (id: string) => `/Item/${id}`,
-  cart: "/Cart",
+export const ROUTES = {
+  home: "Home",
+  item: "Item",
+  cart: "Cart",
+  category: "Category",
 
-  message: "/Messenger",
-  category: "/Category",
-  account: "/Account",
+  message: "Messenger",
+  personal: "Personal",
 };
 export const ICON_SEARCH: IconIProps = {
   name: "search1",

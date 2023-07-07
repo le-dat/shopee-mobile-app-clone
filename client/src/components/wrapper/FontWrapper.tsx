@@ -24,7 +24,11 @@ const FontWrapper: React.FC<IProps> = ({ children }) => {
   if (!fontsLoaded) {
     return null;
   }
-  return <View onLayout={onLayoutRootView}>{children}</View>;
+  return (
+    <View onLayout={onLayoutRootView} style={{ position: "relative" }}>
+      {children}
+    </View>
+  );
 };
 
 export default FontWrapper;

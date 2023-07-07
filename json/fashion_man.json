@@ -1,0 +1,134 @@
+[
+  {
+    "name": "Sơ mi nam kẻ sọc stripes hàn quốc JABASI áo 2 màu xọ xanh , xám form rộng dài tay chất liệu thoáng mát",
+    "categories": ["64a789e44b6403e6a5000e22"],
+    "locations": "TP.HCM",
+    "images": [
+      "https://asset.cloudinary.com/djyfwalqq/b0bf46ec2855c7b5cadec6fc9da8fbc6",
+      "https://asset.cloudinary.com/djyfwalqq/6a06b4f4433928ace41871a809b32a3c",
+      "https://asset.cloudinary.com/djyfwalqq/341d6888083d8a12e59888263f764b4e",
+      "https://asset.cloudinary.com/djyfwalqq/ad1e32be9b65e83575c94a4c933a878a"
+    ],
+    "price": 178000,
+    "original_price": 300000,
+    "sell_number": 1700,
+    "colors": [
+      {
+        "name": "Kẻ xanh",
+        "enable": true
+      },
+      {
+        "name": "Kẻ xám",
+        "enable": false
+      }
+    ],
+    "sizes": [
+      {
+        "name": "S",
+        "enable": true
+      },
+      {
+        "name": "M",
+        "enable": true
+      },
+      {
+        "name": "L",
+        "enable": true
+      },
+      {
+        "name": "XL",
+        "enable": true
+      }
+    ]
+  },
+  {
+    "name": "Áo Sơ Mi Nam Basic Chất Liệu Kaki cao cấp mềm dày dặn, Áo sơ mi nam nữ kiểu dáng hàn quốc cực đẹp",
+    "categories": ["64a789e44b6403e6a5000e22"],
+    "locations": "Hà Nội",
+    "images": [
+      "https://asset.cloudinary.com/djyfwalqq/6791c612a9b036ff12885a503f8a95e3",
+      "https://asset.cloudinary.com/djyfwalqq/e38f3f8aebd1a2ff47888fe82e6edce6",
+      "https://asset.cloudinary.com/djyfwalqq/64d9b7de416d74f42bd3c277f2216951",
+      "https://asset.cloudinary.com/djyfwalqq/3aab58c7d9599f52e3cc4424beaa616e",
+      "https://asset.cloudinary.com/djyfwalqq/af13b68b0b6eb3a8772dbb7df0347945"
+    ],
+    "price": 149000,
+    "original_price": 280000,
+    "sell_number": 5800,
+    "colors": [
+      {
+        "name": "Xanh đậm",
+        "enable": true
+      },
+      {
+        "name": "Be",
+        "enable": true
+      }
+    ],
+    "sizes": [
+      {
+        "name": "M",
+        "enable": true
+      },
+      {
+        "name": "L",
+        "enable": true
+      },
+      {
+        "name": "XL",
+        "enable": true
+      }
+    ]
+  },
+  {
+    "name": "Áo sơ mi nam, sơ mi trơn dài tay phom dáng hàn quốc, chất vải đũi xước mềm mại, thấm hút mồ hôi tốt - SEOUL",
+    "categories": ["64a789e44b6403e6a5000e22"],
+    "locations": "Hà Nội",
+    "images": [
+      "https://asset.cloudinary.com/djyfwalqq/9088ec053ed6a522254711817d9ad413",
+      "https://asset.cloudinary.com/djyfwalqq/a7d6388ce49b0252d871aff45a4e33cf",
+      "https://asset.cloudinary.com/djyfwalqq/7e29290aadc1227c2879b8b6c6487541",
+      "https://asset.cloudinary.com/djyfwalqq/24a2039df3284f3a3ebc32ed9bf8f599",
+      "https://asset.cloudinary.com/djyfwalqq/5ef273a4241d7a8425b477032fc060d8"
+    ],
+    "price": 279000,
+    "original_price": 390000,
+    "sell_number": 59,
+    "colors": [
+      {
+        "name": "Xám",
+        "enable": true
+      },
+      {
+        "name": "xanh nhạt",
+        "enable": true
+      },
+      {
+        "name": "Màu đen",
+        "enable": true
+      },
+      {
+        "name": "Màu trắng",
+        "enable": true
+      }
+    ],
+    "sizes": [
+      {
+        "name": "S",
+        "enable": true
+      },
+      {
+        "name": "M",
+        "enable": true
+      },
+      {
+        "name": "L",
+        "enable": true
+      },
+      {
+        "name": "XL",
+        "enable": true
+      }
+    ]
+  }
+]

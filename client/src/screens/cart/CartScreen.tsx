@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, Text, View } from "react-native";
 
 import FontWrapper from "../../components/wrapper/FontWrapper";
-import CartItem from "../../components/common/cartitem/CartItem";
+import CartItem from "../../components/common/cart-item/CartItem";
 
 const CartScreen: React.FC = () => {
   return (
