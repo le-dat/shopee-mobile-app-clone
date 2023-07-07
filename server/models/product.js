@@ -8,7 +8,7 @@ const productSchema = new Schema(
     name: { type: String, required: true },
     slug: String,
     categories: [{ type: Schema.Types.ObjectId, ref: "Category" }], // Reference to the Category schema
-    locations: { type: String, required: true },
+    location: { type: String, required: true },
     images: { type: [String], required: true },
     sell_number: { type: Number, required: true },
     price: { type: Number, required: true },

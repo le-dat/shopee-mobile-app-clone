@@ -90,25 +90,4 @@ export const ICON_PERSONAL = (active: boolean): IconIProps => ({
   type: "ionicon",
 });
 
-export const IMAGE_SWIPER = [
-  {
-    id: "1",
-    image: require("../assets/images_swiper/image1.jpg"),
-  },
-  {
-    id: "2",
-    image: require("../assets/images_swiper/image2.jpg"),
-  },
-  {
-    id: "3",
-    image: require("../assets/images_swiper/image3.jpg"),
-  },
-  {
-    id: "4",
-    image: require("../assets/images_swiper/image4.jpg"),
-  },
-];
-
-export const STRAPI_API_TOKEN =
-  "b72168c9e0b108292345aa1e42aa425ce8bf301dc0534d83305b593b0f251314dd21744ecc5a9c8f3b71308f07cc47fb722953dfdb080ec50c1b2bc1ebcdec55a157cfe2c6fe8161aae1aa472cceb4f2fe3abdd263694571426b9525aad21e5931ddca260007fa341fe7eba7eb6ba12f6e9fbaeb725b62f954e96a1a3fd2c995";
-export const API_URL = "https://shoe-store-backend-05rp.onrender.com";
+export const API_URL = "https://shopee-mobile-app-clone-server.onrender.com";

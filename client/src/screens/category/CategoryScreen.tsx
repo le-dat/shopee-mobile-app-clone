@@ -4,6 +4,7 @@ import { ScrollView } from "native-base";
 import React from "react";
 import { Image, Text, View } from "react-native";
 
+import { useQuery } from "@tanstack/react-query";
 import Spinner from "react-native-loading-spinner-overlay";
 import Error from "../../components/common/Error";
 import MyCustomIcon from "../../components/common/MyCustomIcon";
@@ -13,8 +14,8 @@ import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import PaddingWrapper from "../../components/wrapper/PaddingWrapper";
 import { COLORS, ICON_BACK, ICON_CART, ROUTES } from "../../constants";
-import useFetch from "../../hooks/useFetch";
 import useIsScroll from "../../hooks/useIsScroll";
+import getCategoryById from "../../services/category/getCategoryById";
 import styles from "./categoryscreen.style";
 
 interface IProps {
@@ -22,39 +23,21 @@ interface IProps {
 }
 
 interface RouteParams {
-  slug: string;
+  id: string;
 }
 
 const CategoryScreen: React.FC<IProps> = ({ navigation }) => {
   const router = useRoute();
-  const { slug } = router.params as RouteParams;
+  const { id } = router.params as RouteParams;
   const { isScroll, handleScroll } = useIsScroll();
 
-  const {
-    data: dataDetail,
-    isLoading: isLoadingDetail,
-    error: errorDetail,
-    refetch: refetchDetail,
-  } = useFetch({
-    endpoint: `categories?populate=*&filters[slug][$eq]=${slug}`,
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: [`category-${id}`],
+    queryFn: () => getCategoryById(id),
   });
 
-  const {
-    data: dataItem,
-    isLoading: isLoadingItem,
-    error: errorItem,
-    refetch: refetchItem,
-  } = useFetch({
-    endpoint: `products?populate=*&filters[categories][slug][$eq]=${slug}`,
-  });
-
-  if (isLoadingDetail) return <Spinner visible={isLoadingDetail} textContent={"Loading..."} />;
-  if (isLoadingItem) return <Spinner visible={isLoadingDetail} textContent={"Loading..."} />;
-
-  if (!dataDetail || errorDetail) return <Error handlePress={refetchDetail} />;
-  if (!dataItem || errorItem) return <Error handlePress={refetchDetail} />;
-
-  const category = dataDetail?.data?.[0]?.attributes;
+  if (isLoading) return <Spinner visible={isLoading} textContent={"Loading..."} />;
+  if (!data || error) return <Error handlePress={refetch} />;
 
   return (
     <FontWrapper>
@@ -76,27 +59,21 @@ const CategoryScreen: React.FC<IProps> = ({ navigation }) => {
         {/* introduce */}
         <View style={styles.category}>
           <View style={styles.categoryImageWrapper}>
-            <Image
-              source={{ uri: category?.image?.data?.attributes?.url }}
-              style={styles.categoryImage}
-            />
+            <Image source={{ uri: data?.image }} style={styles.categoryImage} />
           </View>
           <View style={styles.categoryInfo}>
-            <Text style={styles.categoryName}>{category?.name}</Text>
+            <Text style={styles.categoryName}>{data?.name}</Text>
           </View>
           <View style={styles.categoryImageWrapper}>
-            <Image
-              source={{ uri: category?.image?.data?.attributes?.url }}
-              style={styles.categoryImage}
-            />
+            <Image source={{ uri: data?.image }} style={styles.categoryImage} />
           </View>
         </View>
 
         {/* items */}
         <PaddingWrapper style={{ marginBottom: 150 }}>
           <View style={styles.productList}>
-            {dataItem?.data?.map((item: any, index: number) => (
-              <Card key={index} item={item.attributes} />
+            {data?.products?.map((item, index) => (
+              <Card key={index} item={item} />
             ))}
           </View>
         </PaddingWrapper>

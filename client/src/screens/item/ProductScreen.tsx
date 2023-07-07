@@ -4,13 +4,12 @@ import { ScrollView } from "native-base";
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
+import { useQuery } from "@tanstack/react-query";
 import Spinner from "react-native-loading-spinner-overlay";
 import Error from "../../components/common/Error";
 import MyCustomIcon from "../../components/common/MyCustomIcon";
 import Search from "../../components/common/Search";
 import BottomAction from "../../components/common/bottom/BottomAction";
-import MyCustomSheet from "../../components/common/bottom/MyCustomSheet";
-import Card from "../../components/common/card/Card";
 import ItemCarousel from "../../components/common/carousel/ItemCarousel";
 import Sell from "../../components/common/sell/Sell";
 import FontWrapper from "../../components/wrapper/FontWrapper";
@@ -24,10 +23,10 @@ import {
   ICON_SHARE,
   ROUTES,
 } from "../../constants";
-import useFetch from "../../hooks/useFetch";
 import useIsScroll from "../../hooks/useIsScroll";
+import getProductById from "../../services/product/getProductById";
 import { formatCurrencyVietnam } from "../../utils/common";
-import styles from "./itemscreen.style";
+import styles from "./productscreen.style";
 
 interface IProps {
   navigation: StackNavigationProp<any, any>;
@@ -37,40 +36,31 @@ interface RouteParams {
   slug: string;
 }
 
-const ItemScreen: React.FC<IProps> = ({ navigation }) => {
+const ProductScreen: React.FC<IProps> = ({ navigation }) => {
   const router = useRoute();
   const { slug } = router.params as RouteParams;
   const [isHeart, setIsHeart] = useState<boolean>(false);
   const { isScroll, handleScroll } = useIsScroll();
 
-  const {
-    data: dataDetail,
-    isLoading: isLoadingDetail,
-    error: errorDetail,
-    refetch: refetchDetail,
-  } = useFetch({
-    endpoint: `products?populate=*&filters[slug][$eq]=${slug}`,
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: [`product-${slug}`],
+    queryFn: () => getProductById(slug),
   });
 
-  const {
-    data: dataRelative,
-    isLoading: isLoadingRelative,
-    error: errorRelative,
-    refetch: refetchRelative,
-  } = useFetch({
-    endpoint: `products?populate=*&filters[slug][$ne]=${slug}`,
-  });
+  // const {
+  //   data: dataRelative,
+  //   isLoading: isLoadingRelative,
+  //   error: errorRelative,
+  //   refetch: refetchRelative,
+  // } = useFetch({
+  //   endpoint: `products?populate=*&filters[slug][$ne]=${slug}`,
+  // });
 
-  if (isLoadingDetail) return <Spinner visible={isLoadingDetail} textContent={"Loading..."} />;
-  if (isLoadingRelative) return <Spinner visible={isLoadingRelative} textContent={"Loading..."} />;
-  if (!dataDetail || errorDetail) return <Error handlePress={refetchDetail} />;
-  if (!dataRelative || errorRelative) return <Error handlePress={refetchRelative} />;
-
-  const item = dataDetail?.data?.[0]?.attributes;
-  const category = item?.categories?.data?.[0]?.attributes;
+  if (isLoading) return <Spinner visible={isLoading} textContent={"Loading..."} />;
+  if (!data || isError) return <Error handlePress={refetch} />;
 
   const handleNavigateToCategory = () => {
-    navigation.navigate(ROUTES.category, { slug: category?.slug });
+    navigation.navigate(ROUTES.category, { id: data?.categories?.[0]?.id });
   };
 
   return (
@@ -78,7 +68,7 @@ const ItemScreen: React.FC<IProps> = ({ navigation }) => {
       <HeaderWrapper isScroll={isScroll}>
         <MyCustomIcon {...ICON_BACK} handlePress={() => navigation.goBack()} />
 
-        <Search placeholder={category?.name} />
+        <Search placeholder={data?.categories?.[0]?.name} />
         <View style={{ flexDirection: "row" }}>
           <MyCustomIcon {...ICON_SHARE} handlePress={() => console.log("ICON_SHARE")} />
           <MyCustomIcon {...ICON_CART} handlePress={() => navigation.navigate(ROUTES.cart)} />
@@ -88,21 +78,21 @@ const ItemScreen: React.FC<IProps> = ({ navigation }) => {
 
       <ScrollView onScroll={handleScroll} scrollEventThrottle={16} style={styles.container}>
         {/* image */}
-        <ItemCarousel data={item?.image} />
+        <ItemCarousel data={data.images} />
         {/* detail */}
         <View style={styles.detail}>
           <View style={[styles.row]}>
             <Text numberOfLines={2} style={styles.title}>
-              {item?.name}
+              {data?.name}
             </Text>
-            <Sell price={item?.price} originalPrice={item?.original_price} />
+            <Sell price={data?.price} originalPrice={data?.original_price} />
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.price}>{formatCurrencyVietnam(item?.price)}</Text>
+            <Text style={styles.price}>{formatCurrencyVietnam(data?.price)}</Text>
             <Text style={styles.voucher}>Mua để nhận quà</Text>
           </View>
-          <Text style={styles.originPrice}>{formatCurrencyVietnam(item?.original_price)}</Text>
+          <Text style={styles.originPrice}>{formatCurrencyVietnam(data?.original_price)}</Text>
 
           <View
             style={[
@@ -141,17 +131,17 @@ const ItemScreen: React.FC<IProps> = ({ navigation }) => {
             showsHorizontalScrollIndicator={false}
             style={{ marginTop: 20, marginBottom: 200 }}
           >
-            {dataRelative?.data?.map((item: any, index: number) => (
+            {/* {dataRelative?.data?.map((item: any, index: number) => (
               <Card key={`card-${index}`} item={item?.attributes} border />
-            ))}
+            ))} */}
           </ScrollView>
         </View>
       </ScrollView>
 
       <BottomAction />
-      <MyCustomSheet item={item} />
+      {/* <MyCustomSheet item={item} /> */}
     </FontWrapper>
   );
 };
 
-export default ItemScreen;
+export default ProductScreen;

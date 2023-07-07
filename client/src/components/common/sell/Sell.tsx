@@ -9,7 +9,7 @@ interface IProps {
   originalPrice: number;
 }
 const Sell: React.FC<IProps> = ({ price, originalPrice }) => {
-  if (originalPrice === 0) return null;
+  if (originalPrice === 0 || price === originalPrice) return null;
 
   return (
     <View style={styles.productSell}>

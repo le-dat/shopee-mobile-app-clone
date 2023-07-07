@@ -31,9 +31,31 @@ const createManyProduct = async (req, res) => {
 // Get all products
 const getAllProduct = async (req, res) => {
   try {
-    const products = await Product.find().populate("categories", "id name").exec();
+    const products = await Product.find()
+      .populate({
+        path: "categories",
+        select: "name _id",
+      })
+      .select("name location images sell_number price original_price categories")
+      .exec();
 
-    res.status(200).json({ products, message: "Get all product successfully" });
+    res.status(200).json({ products });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const getProductById = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ product });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -126,6 +148,7 @@ module.exports = {
   createProduct,
   createManyProduct,
   getAllProduct,
+  getProductById,
   updateProductId,
   deleteProductId,
   searchProductByName,

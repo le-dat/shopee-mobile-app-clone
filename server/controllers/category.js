@@ -31,7 +31,7 @@ const createManyCategory = async (req, res) => {
 };
 
 // Get all categories
-const getCategories = async (req, res) => {
+const getAllCategory = async (req, res) => {
   try {
     const categories = await Category.find()
       .populate({ path: "products", select: "-categories -__v" })
@@ -93,7 +93,7 @@ const deleteCategory = async (req, res) => {
 module.exports = {
   createCategory,
   createManyCategory,
-  getCategories,
+  getAllCategory,
   getCategoryById,
   updateCategory,
   deleteCategory,

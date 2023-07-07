@@ -4,8 +4,8 @@ const ProductRouter = require("./product");
 const UserRouter = require("./user");
 
 function router(app) {
-  app.use("/api/categories", CategoryRouter);
   app.use("/api/sliders", SliderRouter);
+  app.use("/api/categories", CategoryRouter);
   app.use("/api/products", ProductRouter);
   app.use("/api/users", UserRouter);
 

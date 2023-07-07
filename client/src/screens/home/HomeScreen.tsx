@@ -3,6 +3,8 @@ import React from "react";
 import { Image, ScrollView, View } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
+import { useQuery } from "@tanstack/react-query";
+import ButtonCart from "../../components/common/ButtonCart";
 import Error from "../../components/common/Error";
 import MyCustomIcon from "../../components/common/MyCustomIcon";
 import Search from "../../components/common/Search";
@@ -12,36 +14,25 @@ import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import PaddingWrapper from "../../components/wrapper/PaddingWrapper";
 import SwiperWrapper from "../../components/wrapper/SwiperWrapper";
-import { ICON_MESSAGE, IMAGE_SWIPER, ROUTES } from "../../constants";
-import useFetch from "../../hooks/useFetch";
+import { ICON_MESSAGE, ROUTES } from "../../constants";
 import useIsScroll from "../../hooks/useIsScroll";
+import getHomeScreen from "../../services/getHomeScreen";
 import styles from "./homescreen.style";
-import ButtonCart from "../../components/common/ButtonCart";
 
 const HomeScreen: React.FC = () => {
   const navigation = useNavigation<any>();
 
   const { isScroll, handleScroll } = useIsScroll();
 
-  const {
-    data: dataItem,
-    isLoading: isLoadingItem,
-    error: errorItem,
-    refetch: refetchItem,
-  } = useFetch({ endpoint: "products?populate=*" });
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ["home"],
+    queryFn: getHomeScreen,
+  });
 
-  const {
-    data: dataCategory,
-    isLoading: isLoadingCategory,
-    error: errorCategory,
-    refetch: refetchCategory,
-  } = useFetch({ endpoint: "categories?populate=*" });
+  if (isLoading) return <Spinner visible={isLoading} textContent={"Loading..."} />;
+  if (isError) return <Error handlePress={refetch} />;
 
-  if (isLoadingItem) return <Spinner visible={isLoadingItem} textContent={"Loading..."} />;
-  if (isLoadingCategory) return <Spinner visible={isLoadingCategory} textContent={"Loading..."} />;
-
-  if (errorItem) return <Error handlePress={refetchItem} />;
-  if (errorCategory) return <Error handlePress={refetchCategory} />;
+  const [sliders, categories, products] = data;
 
   return (
     <FontWrapper>
@@ -55,25 +46,25 @@ const HomeScreen: React.FC = () => {
 
       <ScrollView onScroll={handleScroll} scrollEventThrottle={16}>
         <SwiperWrapper>
-          {IMAGE_SWIPER.map((item, index) => (
+          {sliders.map((slider, index) => (
             <Image
               key={index}
-              source={item.image}
+              source={{ uri: slider.image }}
               resizeMode="contain"
               style={styles.swiperItem}
-              accessibilityLabel={`swiper-${item.id}`}
+              accessibilityLabel={`slider-${index}`}
             />
           ))}
         </SwiperWrapper>
 
         <PaddingWrapper>
-          <TwoRowScrollView data={dataCategory?.data} />
+          <TwoRowScrollView data={categories} />
         </PaddingWrapper>
 
         <PaddingWrapper style={{ marginBottom: 150 }}>
           <View style={styles.productList}>
-            {dataItem?.data?.map((item: any, index: number) => (
-              <Card key={index} item={item.attributes} />
+            {products?.map((item, index) => (
+              <Card key={`product-${index}`} item={item} />
             ))}
           </View>
         </PaddingWrapper>

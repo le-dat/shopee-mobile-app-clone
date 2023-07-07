@@ -4,11 +4,11 @@ import { View, Text, TouchableOpacity } from "react-native";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks/useRedux";
 import { handleCloseSheet } from "../../../redux/features/sheetSlice";
-import { ItemIProps } from "../../../types/data";
+import { ProductIProps } from "../../../types/product";
 import { COLORS } from "../../../constants";
 
 interface IProps {
-  item: ItemIProps;
+  item: ProductIProps;
 }
 const MyCustomSheet: React.FC<IProps> = ({ item }) => {
   const dispatch = useAppDispatch();

@@ -1,42 +1,39 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { CategoryIProps, ResponseArrayIProps } from "../../../types/data";
-import styles from "./twocolumnscrollview.style";
-import { useNavigation } from "@react-navigation/native";
 import { ROUTES } from "../../../constants";
+import { CategoryIProps } from "../../../types/product";
+import styles from "./twocolumnscrollview.style";
 
-const TwoRowScrollView: React.FC<ResponseArrayIProps<CategoryIProps>> = ({ data }) => {
+interface IProps {
+  data: CategoryIProps[];
+}
+const TwoRowScrollView: React.FC<IProps> = ({ data }) => {
   const navigation = useNavigation<any>();
 
   const handleNavigateToItem = (slug: string) => {
     navigation.navigate(ROUTES.cart, { slug });
   };
 
-  const renderItem = (item: { attributes: CategoryIProps }, index: number) => {
+  const renderItem = (item: CategoryIProps, index: number) => {
     return (
       <TouchableOpacity
         key={index}
         style={styles.categoryItem}
-        onPress={() => handleNavigateToItem(item?.attributes?.slug)}
+        onPress={() => handleNavigateToItem(item?.id)}
       >
-        <Image
-          source={{ uri: item?.attributes?.image?.data?.attributes?.url }}
-          resizeMode="contain"
-          style={styles.categoryItemImage}
-        />
-        <Text style={styles.categoryItemText}>{item?.attributes?.name}</Text>
+        <Image source={{ uri: item.image }} resizeMode="contain" style={styles.categoryItemImage} />
+        <Text style={styles.categoryItemText}>{item?.name}</Text>
       </TouchableOpacity>
     );
   };
 
   const renderItems = () => {
     const items = [];
-    // example: data.length > 10
-    const newData = [...data, ...data];
 
-    for (let i = 0; i < newData.length; i += 2) {
-      const item1 = newData[i];
-      const item2 = newData[i + 1];
+    for (let i = 0; i < data.length; i += 2) {
+      const item1 = data[i];
+      const item2 = data[i + 1];
 
       items.push(
         <View key={i} style={styles.column}>

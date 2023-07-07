@@ -2,30 +2,19 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, StyleProp, Text, TouchableOpacity, View, ViewStyle } from "react-native";
 
-import useFetch from "../../../hooks/useFetch";
-import { ItemIProps } from "../../../types/data";
+import { ProductIProps } from "../../../types/product";
 import { formatCurrencyVietnam } from "../../../utils/common";
 import styles from "./cartitem.style";
 
 interface IProps {
   id: number;
-  item: ItemIProps;
+  item: ProductIProps;
   style?: StyleProp<ViewStyle>;
 }
 const CartItem: React.FC<IProps> = ({ id, item, style }) => {
   const navigation = useNavigation<any>();
 
   const store = [2, 3, 4, 5];
-  const query = store.map((id) => `&filters[id][$in][0]=${store[id]}`).join("");
-
-  const {
-    data: dataDetail,
-    isLoading: isLoadingDetail,
-    error: errorDetail,
-    refetch: refetchDetail,
-  } = useFetch({
-    endpoint: `products?populate=*${query}`,
-  });
 
   const handleNavigateToItem = () => {
     // navigation.navigate("Category", { slug: category?.slug });
@@ -36,7 +25,7 @@ const CartItem: React.FC<IProps> = ({ id, item, style }) => {
       <View>
         <View style={styles.imageWrapper}>
           <Image
-            source={{ uri: item?.thumbnail?.data?.attributes?.url }}
+            source={{ uri: item?.images[0] }}
             resizeMode="contain"
             style={styles.image}
             accessibilityLabel={`category-${id}`}

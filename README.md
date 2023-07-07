@@ -7,3 +7,6 @@
 <img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot3.jpg" alt="shopee screenshot" width="200" height="whatever">
 
 ### Feature:
+
+- Switch to the home screen, category, and produc
+- Add, update, or delete products from your cart

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { ItemIProps, StrapiIProps } from "../../types/data";
+import { ProductIProps, StrapiIProps } from "../../types/product";
 
 export interface DataIProps {
-  item: StrapiIProps<ItemIProps>;
+  item: StrapiIProps<ProductIProps>;
   quantity: number;
 }
 export interface IProps {

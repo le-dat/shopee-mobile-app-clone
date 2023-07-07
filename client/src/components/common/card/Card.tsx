@@ -1,15 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Image, StyleProp, Text, TouchableOpacity, View, ViewStyle } from "react-native";
+import { StyleProp, Text, TouchableOpacity, View, ViewStyle } from "react-native";
 
-import { ItemIProps } from "../../../types/data";
+import { ProductIProps } from "../../../types/product";
 import { formatCurrencyVietnam } from "../../../utils/common";
+import MyCustomImage from "../MyCustomImage";
 import Sell from "../sell/Sell";
 import styles from "./card.style";
-import MyCustomImage from "../MyCustomImage";
 
 interface IProps {
-  item: ItemIProps;
+  item: ProductIProps;
   border?: boolean;
   style?: StyleProp<ViewStyle>;
 }
@@ -28,14 +28,7 @@ const Card: React.FC<IProps> = ({ item, border, style }) => {
           <Sell price={item?.price} originalPrice={item?.original_price} />
         </View>
         <View style={styles.productItemImageWrapper}>
-          <MyCustomImage
-            url={item?.thumbnail?.data?.attributes?.url}
-            style={styles.productItemImage}
-          />
-          {/* <Image
-            source={{ uri: item?.thumbnail?.data?.attributes?.url }}
-            style={styles.productItemImage}
-          /> */}
+          <MyCustomImage url={item?.images[0]} style={styles.productItemImage} />
         </View>
 
         <View style={{ padding: 10, paddingTop: 20 }}>

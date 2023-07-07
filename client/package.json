@@ -23,6 +23,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@rneui/base": "^4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.7",
+    "@tanstack/react-query": "^4.29.19",
     "axios": "^1.4.0",
     "expo": "~48.0.18",
     "expo-font": "~11.1.1",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@tanstack/eslint-plugin-query": "^4.29.9",
     "@types/react": "~18.0.14",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",

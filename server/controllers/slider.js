@@ -26,7 +26,7 @@ const createManySlider = async (req, res) => {
 };
 
 // Get all sliders
-const getSliders = async (req, res) => {
+const getAllSlider = async (req, res) => {
   try {
     const sliders = await Slider.find();
     res.status(200).json({ sliders });
@@ -85,7 +85,7 @@ const deleteSlider = async (req, res) => {
 module.exports = {
   createSlider,
   createManySlider,
-  getSliders,
+  getAllSlider,
   getSliderById,
   updateSlider,
   deleteSlider,
