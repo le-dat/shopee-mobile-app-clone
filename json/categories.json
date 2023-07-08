@@ -1,46 +1,46 @@
 [
   {
     "name": "Thời Trang Nam",
-    "image": "https://asset.cloudinary.com/djyfwalqq/0321f793a1d0dc041b94d29e016fe154"
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696978/shopee/categories/image13_duegw4.png"
   },
   {
     "name": "Thời Trang Nữ",
-    "image": "https://asset.cloudinary.com/djyfwalqq/155e9160800a9a72f3fc055eb5330eb3"
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696978/shopee/categories/image14_pphcmj.png"
   },
   {
     "name": "Máy Tính & Laptop",
-    "image": "https://asset.cloudinary.com/djyfwalqq/b0dd5c45a36f577d184d94409a4efab7"
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696979/shopee/categories/image19_dhleuu.png"
   },
   {
     "name": "Thiết Bị Điện Tử",
-    "image": "https://asset.cloudinary.com/djyfwalqq/d4b03b542d5967b9311563b106a30805"
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696978/shopee/categories/image15_zniuy2.png"
   },
   {
     "name": "Đồng Hồ",
-    "image": "https://asset.cloudinary.com/djyfwalqq/7192b34a5be5fe9a067e45cce7f1badf"
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696979/shopee/categories/image23_cpdmky.png"
   },
   {
     "name": "Giày Dép Nam",
-    "image": "https://asset.cloudinary.com/djyfwalqq/c1d429101452d542cf17e7a846457ccd"
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696979/shopee/categories/image24_kgjs4y.png"
   },
   {
     "name": "Giày Dép Nữ",
-    "image": "https://asset.cloudinary.com/djyfwalqq/9000560a81f58c4cbeafd16129ceba43"
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696979/shopee/categories/image26_slchzo.png"
   },
   {
     "name": "Túi Ví Nữ",
-    "image": "https://asset.cloudinary.com/djyfwalqq/f048661b4e53d6c4e8561bbfa2e7b379"
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696978/shopee/categories/image18_vsmyj9.png"
   },
   {
     "name": "Nhà Cửa & Đời Sống",
-    "image": "https://asset.cloudinary.com/djyfwalqq/e113fce661d9a457570f786045ccef53"
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696978/shopee/categories/image18_vsmyj9.png"
   },
   {
     "name": "Máy Ảnh & Máy Quay Phim",
-    "image": "https://asset.cloudinary.com/djyfwalqq/c6aed52b60a07652ddc2235018fd572f"
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696979/shopee/categories/image21_gvnzao.png"
   },
   {
-    "name": "Thể Thao & Du Lịch",
-    "image": "https://asset.cloudinary.com/djyfwalqq/bbc562aa17949ad11b8c9cf92674e4b6"
+    "name": "Sức khỏe",
+    "image": "https://res.cloudinary.com/djyfwalqq/image/upload/v1688696979/shopee/categories/image22_znwv58.png"
   }
 ]

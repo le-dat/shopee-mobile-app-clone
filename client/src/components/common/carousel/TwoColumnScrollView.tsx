@@ -1,9 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+
 import { ROUTES } from "../../../constants";
-import { CategoryIProps } from "../../../types/product";
 import styles from "./twocolumnscrollview.style";
+import { CategoryIProps } from "../../../types/category";
 
 interface IProps {
   data: CategoryIProps[];
@@ -23,7 +24,9 @@ const TwoRowScrollView: React.FC<IProps> = ({ data }) => {
         onPress={() => handleNavigateToItem(item?.id)}
       >
         <Image source={{ uri: item.image }} resizeMode="contain" style={styles.categoryItemImage} />
-        <Text style={styles.categoryItemText}>{item?.name}</Text>
+        <Text numberOfLines={2} style={styles.categoryItemText}>
+          {item?.name}
+        </Text>
       </TouchableOpacity>
     );
   };

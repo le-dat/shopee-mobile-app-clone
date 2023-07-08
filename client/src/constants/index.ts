@@ -26,7 +26,7 @@ export const TABS = {
 };
 export const ROUTES = {
   home: "Home",
-  item: "Item",
+  product: "Product",
   cart: "Cart",
   category: "Category",
 

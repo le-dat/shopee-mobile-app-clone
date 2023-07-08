@@ -37,7 +37,7 @@ const ItemCarousel: React.FC<IProps> = ({ data }) => {
             onPress={() => setActive(index)}
           >
             <Image
-              source={{ uri: data?.[active] }}
+              source={{ uri: data?.[index] }}
               resizeMode="contain"
               style={styles.categoryItemImage}
             />

@@ -25,46 +25,38 @@ import {
 } from "../../constants";
 import useIsScroll from "../../hooks/useIsScroll";
 import getProductById from "../../services/product/getProductById";
-import { formatCurrencyVietnam } from "../../utils/common";
+import { formatCurrencyVietnam, formatSellNumber } from "../../utils/common";
 import styles from "./productscreen.style";
+import Card from "../../components/common/card/Card";
 
 interface IProps {
   navigation: StackNavigationProp<any, any>;
 }
 
 interface RouteParams {
-  slug: string;
+  id: string;
 }
 
 const ProductScreen: React.FC<IProps> = ({ navigation }) => {
   const router = useRoute();
-  const { slug } = router.params as RouteParams;
+  const { id } = router.params as RouteParams;
   const [isHeart, setIsHeart] = useState<boolean>(false);
   const { isScroll, handleScroll } = useIsScroll();
 
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: [`product-${slug}`],
-    queryFn: () => getProductById(slug),
+    queryKey: [`product-${id}`],
+    queryFn: () => getProductById(id),
   });
-
-  // const {
-  //   data: dataRelative,
-  //   isLoading: isLoadingRelative,
-  //   error: errorRelative,
-  //   refetch: refetchRelative,
-  // } = useFetch({
-  //   endpoint: `products?populate=*&filters[slug][$ne]=${slug}`,
-  // });
 
   if (isLoading) return <Spinner visible={isLoading} textContent={"Loading..."} />;
   if (!data || isError) return <Error handlePress={refetch} />;
 
   const handleNavigateToCategory = () => {
-    navigation.navigate(ROUTES.category, { id: data?.categories?.[0]?.id });
+    navigation.navigate(ROUTES.category, { id: data?.categories?.[0]?._id });
   };
 
   return (
-    <FontWrapper>
+    <FontWrapper style={styles.wrapper}>
       <HeaderWrapper isScroll={isScroll}>
         <MyCustomIcon {...ICON_BACK} handlePress={() => navigation.goBack()} />
 
@@ -100,7 +92,7 @@ const ProductScreen: React.FC<IProps> = ({ navigation }) => {
               { justifyContent: "space-between", alignItems: "center", marginTop: 10 },
             ]}
           >
-            <Text>Đã bán 5.2k</Text>
+            <Text>Đã bán {formatSellNumber(data?.sell_number)}</Text>
             <View style={{ flexDirection: "row" }}>
               <MyCustomIcon
                 {...ICON_HEART(isHeart)}
@@ -116,26 +108,28 @@ const ProductScreen: React.FC<IProps> = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={[styles.container]}>
-          <View style={[styles.row, { justifyContent: "space-between" }]}>
-            <Text style={styles.title}>Sản phẩm liên quan</Text>
-            <TouchableOpacity
-              onPress={() => handleNavigateToCategory()}
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+        {data?.relative?.length > 0 && (
+          <View style={[styles.container, { padding: 10 }]}>
+            <View style={[styles.row, { justifyContent: "space-between" }]}>
+              <Text style={styles.title}>Sản phẩm liên quan</Text>
+              <TouchableOpacity
+                onPress={() => handleNavigateToCategory()}
+                style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+              >
+                <Text style={{ color: COLORS.primary }}>Xem tất cả</Text>
+              </TouchableOpacity>
+            </View>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={{ marginTop: 20, marginBottom: 200 }}
             >
-              <Text style={{ color: COLORS.primary }}>Xem tất cả</Text>
-            </TouchableOpacity>
+              {data?.relative?.map((item, index) => (
+                <Card key={`card-${index}`} product={item} border />
+              ))}
+            </ScrollView>
           </View>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{ marginTop: 20, marginBottom: 200 }}
-          >
-            {/* {dataRelative?.data?.map((item: any, index: number) => (
-              <Card key={`card-${index}`} item={item?.attributes} border />
-            ))} */}
-          </ScrollView>
-        </View>
+        )}
       </ScrollView>
 
       <BottomAction />

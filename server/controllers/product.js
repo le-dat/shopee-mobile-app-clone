@@ -55,6 +55,16 @@ const getProductById = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
+    const relative = await Product.find({ _id: { $ne: productId } })
+      .populate({
+        path: "categories",
+        select: "name _id",
+      })
+      .select("name location images sell_number price original_price categories")
+      .exec();
+
+    product.relative = relative;
+
     res.status(200).json({ product });
   } catch (error) {
     console.error(error);

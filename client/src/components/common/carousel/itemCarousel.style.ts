@@ -21,10 +21,11 @@ const styles = StyleSheet.create<any>({
     flexDirection: "row",
   },
   categoryItem: (active: boolean) => ({
-    borderWidth: 1,
     width: 80,
     height: 80,
+    borderWidth: 2,
     borderColor: active ? COLORS.primary : "transparent",
+    marginRight: 5,
   }),
   categoryItemImage: {
     width: "100%",

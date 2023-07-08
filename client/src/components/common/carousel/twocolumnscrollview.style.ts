@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    gap: 3,
+    gap: 8,
     padding: 5,
   },
   column: {

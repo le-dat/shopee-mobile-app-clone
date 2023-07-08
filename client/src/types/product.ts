@@ -1,6 +1,7 @@
 import { CategoryIProps } from "./category";
 
 export interface ProductIProps {
+  _id: string;
   name: string;
   slug?: string;
   categories: CategoryIProps[];
@@ -11,6 +12,7 @@ export interface ProductIProps {
   original_price: number;
   size: SizeIProps[];
   color: ColorIProps[];
+  relative: [ProductIProps];
 }
 
 export interface SizeIProps {

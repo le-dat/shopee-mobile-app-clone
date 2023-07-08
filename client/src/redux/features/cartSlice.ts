@@ -1,52 +1,42 @@
-import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { ProductIProps, StrapiIProps } from "../../types/product";
+import { createSlice } from "@reduxjs/toolkit";
 
-export interface DataIProps {
-  item: StrapiIProps<ProductIProps>;
+import { ProductIProps } from "../../types/product";
+
+interface AttributeIProp extends ProductIProps {
   quantity: number;
 }
 export interface IProps {
-  items: DataIProps[] | [];
+  products: AttributeIProp[] | [];
 }
 const initialState: IProps = {
-  items: [],
+  products: [],
 };
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    getItem: (state, action: PayloadAction<number>) => {
-      state.items.find((item) => item.item.id === action.payload);
+    getProduct: (state: IProps, action: PayloadAction<string>) => {
+      state.products.find((p) => p.id === action.payload);
     },
-    removeItem: (state, action: PayloadAction<number>) => {
-      state.items.find((item) => item.item.id !== action.payload);
+    removeProduct: (state: IProps, action: PayloadAction<string>) => {
+      state.products.filter((p: { id: string }) => p.id !== action.payload);
     },
-    addItem: (state, action: PayloadAction<DataIProps>) => {
-      const existingItem = state.items.find((item) => item.item.id === action.payload.item.id);
-      if (existingItem) {
-        existingItem.quantity += 1;
-      } else {
-        const newItem = {
-          item: action.payload.item,
-          quantity: 1,
-        };
-        state.items = [...state.items, newItem];
-      }
+    addProduct: (state: IProps, action: PayloadAction<AttributeIProp>) => {
+      const newProducts = state.products.map((p) =>
+        p.id === action.payload.id ? { ...p, quantity: p.quantity + 1 } : p
+      );
+      state.products = newProducts;
     },
-    decreaseItem: (state, action: PayloadAction<DataIProps>) => {
-      const existingItem = state.items.find((item) => item.item.id === action.payload.item.id);
-      if (existingItem) {
-        if (existingItem?.quantity === 1) {
-          state.items = state.items.filter((item) => item.item.id !== action.payload.item.id);
-        } else {
-          existingItem.quantity -= 1;
-        }
-      }
+    updateProduct: (state: IProps, action: PayloadAction<AttributeIProp>) => {
+      const newProducts = state.products.map((p) =>
+        p.id === action.payload.id ? action.payload : p
+      );
+      state.products = newProducts;
     },
   },
 });
 
-export const { addItem, removeItem, getItem, decreaseItem } = cartSlice.actions;
+export const { addProduct, removeProduct, updateProduct, getProduct } = cartSlice.actions;
 export default cartSlice.reducer;

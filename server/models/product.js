@@ -25,6 +25,7 @@ const productSchema = new Schema(
         enable: { type: Boolean, required: true },
       },
     ],
+    relative: [{ type: Schema.Types.ObjectId, ref: "Product" }],
   },
   {
     timestamps: true,

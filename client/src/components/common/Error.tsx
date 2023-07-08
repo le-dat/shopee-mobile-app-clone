@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { COLORS } from "../../constants";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { COLORS, FONTS } from "../../constants";
+import FontWrapper from "../wrapper/FontWrapper";
 
 interface IProps {
   text?: string;
@@ -8,10 +9,13 @@ interface IProps {
 }
 const Error: React.FC<IProps> = ({ text = "Refresh", handlePress }) => {
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.wrapper}>
-      <Text>Opp! something went wrong. Please try again!</Text>
-      <Text>{text}</Text>
-    </TouchableOpacity>
+    <FontWrapper style={styles.wrapper}>
+      <Text style={styles.text}>Opp! something went wrong.</Text>
+      <Text style={styles.text}>Please try again!</Text>
+      <TouchableOpacity onPress={handlePress} style={styles.button}>
+        <Text style={styles.textButton}>{text}</Text>
+      </TouchableOpacity>
+    </FontWrapper>
   );
 };
 
@@ -22,9 +26,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "column",
     gap: 20,
+  },
+  text: {
+    fontFamily: FONTS.medium,
+    fontSize: 20,
+    paddingHorizontal: 20,
+    color: COLORS.text,
+    textAlign: "center",
+  },
+  textButton: {
     color: COLORS.white,
+    fontFamily: FONTS.regular,
+  },
+  button: {
     backgroundColor: COLORS.primary,
     padding: 20,
+    borderRadius: 10,
   },
 });
 export default Error;

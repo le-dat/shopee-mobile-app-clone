@@ -46,11 +46,10 @@ const HomeScreen: React.FC = () => {
 
       <ScrollView onScroll={handleScroll} scrollEventThrottle={16}>
         <SwiperWrapper>
-          {sliders.map((slider, index) => (
+          {sliders?.map((slider, index) => (
             <Image
               key={index}
-              source={{ uri: slider.image }}
-              resizeMode="contain"
+              source={{ uri: slider?.image }}
               style={styles.swiperItem}
               accessibilityLabel={`slider-${index}`}
             />
@@ -63,8 +62,8 @@ const HomeScreen: React.FC = () => {
 
         <PaddingWrapper style={{ marginBottom: 150 }}>
           <View style={styles.productList}>
-            {products?.map((item, index) => (
-              <Card key={`product-${index}`} item={item} />
+            {products?.map((product, index) => (
+              <Card key={`product-${index}`} product={product} />
             ))}
           </View>
         </PaddingWrapper>

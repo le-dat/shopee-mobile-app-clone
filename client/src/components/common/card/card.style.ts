@@ -9,7 +9,7 @@ const styles = StyleSheet.create<any>({
     paddingHorizontal: 5,
     justifyContent: "center",
   },
-  productItem: (border: boolean) => ({
+  productWrapper: (border: boolean) => ({
     borderColor: border ? COLORS.gray : "transparent",
     borderWidth: 1,
     borderRadius: 4,
@@ -24,29 +24,29 @@ const styles = StyleSheet.create<any>({
     right: 0,
     zIndex: 1,
   },
-  productItemImageWrapper: {
+  productImageWrapper: {
     width: "100%",
     alignItem: "flex-start",
     justifyContent: "center",
     height: 150,
   },
-  productItemImage: {
+  productImage: {
     width: "100%",
     height: "100%",
   },
-  productItemText: {
+  productText: {
     marginBottom: 20,
   },
-  productItemBottom: {
+  productBottom: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  productItemPrice: {
+  productPrice: {
     color: COLORS.primary,
     fontSize: 16,
   },
-  productItemSellNumber: {
+  productSellNumber: {
     fontSize: 12,
     padding: 10,
   },

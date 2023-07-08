@@ -1,14 +1,16 @@
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback } from "react";
-import { View } from "react-native";
+import { StyleSheet, ViewStyle } from "react-native";
+import { StyleProp, View } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
 interface IProps {
   children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 }
-const FontWrapper: React.FC<IProps> = ({ children }) => {
+const FontWrapper: React.FC<IProps> = ({ children, style }) => {
   const [fontsLoaded] = useFonts({
     DMBold: require("../../assets/fonts/DMSans-Bold.ttf"),
     DMMedium: require("../../assets/fonts/DMSans-Medium.ttf"),
@@ -25,10 +27,17 @@ const FontWrapper: React.FC<IProps> = ({ children }) => {
     return null;
   }
   return (
-    <View onLayout={onLayoutRootView} style={{ position: "relative" }}>
+    <View onLayout={onLayoutRootView} style={[styles.wrapper, style]}>
       {children}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    position: "relative",
+    flex: 1,
+  },
+});
 
 export default FontWrapper;

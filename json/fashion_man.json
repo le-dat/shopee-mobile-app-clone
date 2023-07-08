@@ -4,13 +4,13 @@
     "categories": ["64a7d16d539e50d4f5c022c7"],
     "location": "TP.HCM",
     "images": [
-      "https://asset.cloudinary.com/djyfwalqq/b0bf46ec2855c7b5cadec6fc9da8fbc6",
-      "https://asset.cloudinary.com/djyfwalqq/6a06b4f4433928ace41871a809b32a3c",
-      "https://asset.cloudinary.com/djyfwalqq/341d6888083d8a12e59888263f764b4e",
-      "https://asset.cloudinary.com/djyfwalqq/ad1e32be9b65e83575c94a4c933a878a"
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719221/shopee/fashon_man/item1/image1_ytnvg7.jpg",
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719221/shopee/fashon_man/item1/image2_t5wf5s.jpg",
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719222/shopee/fashon_man/item1/image3_usnmqr.jpg",
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719221/shopee/fashon_man/item1/image4_yyo0yi.jpg"
     ],
-    "price": 178000,
-    "original_price": 300000,
+    "price": 178.0,
+    "original_price": 300.0,
     "sell_number": 1700,
     "colors": [
       {
@@ -46,14 +46,14 @@
     "categories": ["64a7d16d539e50d4f5c022c7"],
     "location": "Hà Nội",
     "images": [
-      "https://asset.cloudinary.com/djyfwalqq/6791c612a9b036ff12885a503f8a95e3",
-      "https://asset.cloudinary.com/djyfwalqq/e38f3f8aebd1a2ff47888fe82e6edce6",
-      "https://asset.cloudinary.com/djyfwalqq/64d9b7de416d74f42bd3c277f2216951",
-      "https://asset.cloudinary.com/djyfwalqq/3aab58c7d9599f52e3cc4424beaa616e",
-      "https://asset.cloudinary.com/djyfwalqq/af13b68b0b6eb3a8772dbb7df0347945"
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719223/shopee/fashon_man/item3/image1_utepxk.jpg",
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719222/shopee/fashon_man/item2/image2_lovpuw.jpg",
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719222/shopee/fashon_man/item2/image3_kvyj7m.jpg",
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719221/shopee/fashon_man/item2/image4_hdyngs.jpg",
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719223/shopee/fashon_man/item2/image5_heyikf.jpg"
     ],
-    "price": 149000,
-    "original_price": 280000,
+    "price": 149.0,
+    "original_price": 280.0,
     "sell_number": 5800,
     "colors": [
       {
@@ -85,14 +85,13 @@
     "categories": ["64a7d16d539e50d4f5c022c7"],
     "location": "Hà Nội",
     "images": [
-      "https://asset.cloudinary.com/djyfwalqq/9088ec053ed6a522254711817d9ad413",
-      "https://asset.cloudinary.com/djyfwalqq/a7d6388ce49b0252d871aff45a4e33cf",
-      "https://asset.cloudinary.com/djyfwalqq/7e29290aadc1227c2879b8b6c6487541",
-      "https://asset.cloudinary.com/djyfwalqq/24a2039df3284f3a3ebc32ed9bf8f599",
-      "https://asset.cloudinary.com/djyfwalqq/5ef273a4241d7a8425b477032fc060d8"
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719223/shopee/fashon_man/item3/image1_utepxk.jpg3",
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719224/shopee/fashon_man/item3/image2_efqy78.jpg",
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719223/shopee/fashon_man/item3/image3_hyeycv.jpg",
+      "https://res.cloudinary.com/djyfwalqq/image/upload/v1688719222/shopee/fashon_man/item3/image4_pbkjsl.jpg"
     ],
-    "price": 279000,
-    "original_price": 390000,
+    "price": 279.0,
+    "original_price": 390.0,
     "sell_number": 59,
     "colors": [
       {

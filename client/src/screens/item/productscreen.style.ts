@@ -2,8 +2,11 @@ import { StyleSheet } from "react-native";
 import { COLORS, FONTS } from "../../constants";
 
 const styles = StyleSheet.create({
-  wrapper: {},
+  wrapper: {
+    flex: 1,
+  },
   container: {
+    flex: 1,
     backgroundColor: COLORS.bgPrimary,
   },
   detail: {

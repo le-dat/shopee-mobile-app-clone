@@ -9,7 +9,7 @@ const styles = StyleSheet.create<any>({
     alignItems: "center",
     position: "absolute",
     height: 60,
-    bottom: 90,
+    bottom: 0,
     backgroundColor: COLORS.white,
   },
   divide: {
