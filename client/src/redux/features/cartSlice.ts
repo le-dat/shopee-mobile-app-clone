@@ -1,13 +1,9 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
+import { ProductCartIProps, UUID_IProps } from "../../types/store";
 
-import { ProductIProps } from "../../types/product";
-
-interface AttributeIProp extends ProductIProps {
-  quantity: number;
-}
 export interface IProps {
-  products: AttributeIProp[] | [];
+  products: ProductCartIProps[] | [];
 }
 const initialState: IProps = {
   products: [],
@@ -17,21 +13,21 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    getProduct: (state: IProps, action: PayloadAction<string>) => {
-      state.products.find((p) => p.id === action.payload);
+    getProduct: (state, action: PayloadAction<UUID_IProps>) => {
+      state.products.find((p) => p.uuid === action.payload.uuid);
     },
-    removeProduct: (state: IProps, action: PayloadAction<string>) => {
-      state.products.filter((p: { id: string }) => p.id !== action.payload);
+
+    removeProduct: (state, action: PayloadAction<UUID_IProps>) => {
+      state.products.filter((p) => p.uuid !== action.payload.uuid);
     },
-    addProduct: (state: IProps, action: PayloadAction<AttributeIProp>) => {
+
+    addProduct: (state, action: PayloadAction<ProductCartIProps>) => {
+      state.products = [...state.products, action.payload];
+    },
+
+    updateProduct: (state, action: PayloadAction<ProductCartIProps>) => {
       const newProducts = state.products.map((p) =>
-        p.id === action.payload.id ? { ...p, quantity: p.quantity + 1 } : p
-      );
-      state.products = newProducts;
-    },
-    updateProduct: (state: IProps, action: PayloadAction<AttributeIProp>) => {
-      const newProducts = state.products.map((p) =>
-        p.id === action.payload.id ? action.payload : p
+        p.uuid === action.payload.uuid ? action.payload : p
       );
       state.products = newProducts;
     },

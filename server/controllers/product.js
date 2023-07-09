@@ -54,8 +54,12 @@ const getProductById = async (req, res) => {
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
+    const categoryIds = product.categories[0]; // Assuming only one category is assigned to the product
 
-    const relative = await Product.find({ _id: { $ne: productId } })
+    const relative = await Product.find({
+      _id: { $ne: productId },
+      categories: { $in: categoryIds },
+    })
       .populate({
         path: "categories",
         select: "name _id",

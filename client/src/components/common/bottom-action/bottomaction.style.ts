@@ -10,11 +10,12 @@ const styles = StyleSheet.create<any>({
     position: "absolute",
     height: 60,
     bottom: 0,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.green,
   },
   divide: {
-    borderRightWidth: 1,
-    borderRightColor: COLORS.gray,
+    width: 1,
+    height: "60%",
+    backgroundColor: COLORS.text,
   },
   button: {
     height: "100%",
@@ -24,11 +25,12 @@ const styles = StyleSheet.create<any>({
     justifyContent: "center",
   },
   buttonCart: {
-    color: COLORS.primary,
-    backgroundColor: COLORS.white,
+    color: COLORS.white,
+    backgroundColor: COLORS.green,
   },
   text: {
     fontSize: 10,
+    color: COLORS.white,
   },
   buttonPayment: {
     flex: 1,

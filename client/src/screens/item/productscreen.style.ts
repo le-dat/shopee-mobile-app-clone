@@ -1,50 +1,26 @@
 import { StyleSheet } from "react-native";
-import { COLORS, FONTS } from "../../constants";
+import { COLORS } from "../../constants";
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<any>({
   wrapper: {
     flex: 1,
   },
   container: {
     flex: 1,
-    backgroundColor: COLORS.bgPrimary,
-  },
-  detail: {
-    padding: 10,
-    marginVertical: 10,
-    backgroundColor: COLORS.white,
-    width: "100%",
+    backgroundColor: COLORS.gray,
   },
   title: {
     flex: 1,
   },
-  row: {
+  subTitle: {
     flexDirection: "row",
-    gap: 15,
-  },
-  price: {
-    fontSize: 18,
-    color: COLORS.primary,
-    fontWeight: "bold",
-    backgroundColor: COLORS.white,
-  },
-  originPrice: {
-    textDecorationLine: "line-through",
-    color: COLORS.gray,
-  },
-  voucher: {
-    fontSize: 10,
-    lineHeight: 20,
-    fontFamily: FONTS.bold,
-    display: "flex",
-    justifyContent: "center",
     alignItems: "center",
-    textAlign: "center",
-    color: COLORS.primary,
-    borderColor: COLORS.primary,
-    borderWidth: 1,
-    paddingHorizontal: 3,
-    paddingVertical: 1,
+  },
+  icon: {},
+  productList: {
+    padding: 10,
+    marginBottom: 100,
+    backgroundColor: COLORS.white,
   },
 });
 

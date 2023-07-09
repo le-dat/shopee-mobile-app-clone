@@ -6,9 +6,9 @@ import { Image, Text, View } from "react-native";
 
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "react-native-loading-spinner-overlay";
-import Error from "../../components/common/Error";
-import MyCustomIcon from "../../components/common/MyCustomIcon";
-import Search from "../../components/common/Search";
+import Error from "../../components/common/error/Error";
+import MyCustomIcon from "../../components/common/icon/MyCustomIcon";
+import Search from "../../components/common/search/Search";
 import Card from "../../components/common/card/Card";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
@@ -54,7 +54,7 @@ const CategoryScreen: React.FC<IProps> = ({ navigation }) => {
       <ScrollView
         onScroll={handleScroll}
         scrollEventThrottle={16}
-        style={{ backgroundColor: COLORS.bgPrimary }}
+        style={{ backgroundColor: COLORS.gray }}
       >
         {/* introduce */}
         <View style={styles.category}>

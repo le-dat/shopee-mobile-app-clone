@@ -3,8 +3,8 @@ import React from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { ROUTES } from "../../../constants";
-import styles from "./twocolumnscrollview.style";
 import { CategoryIProps } from "../../../types/category";
+import styles from "./tworowscrollview.style";
 
 interface IProps {
   data: CategoryIProps[];
@@ -21,7 +21,7 @@ const TwoRowScrollView: React.FC<IProps> = ({ data }) => {
       <TouchableOpacity
         key={index}
         style={styles.categoryItem}
-        onPress={() => handleNavigateToItem(item?.id)}
+        onPress={() => handleNavigateToItem(item?._id)}
       >
         <Image source={{ uri: item.image }} resizeMode="contain" style={styles.categoryItemImage} />
         <Text numberOfLines={2} style={styles.categoryItemText}>

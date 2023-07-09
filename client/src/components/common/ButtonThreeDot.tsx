@@ -1,6 +1,6 @@
 import { Button, Divider, Menu } from "native-base";
 import React from "react";
-import MyCustomIcon from "./MyCustomIcon";
+import MyCustomIcon from "./icon/MyCustomIcon";
 import { ICON_DOTS_THREE_VERTICAL } from "../../constants";
 
 const ButtonThreeDot: React.FC = () => {

@@ -6,9 +6,9 @@ export const COLORS = {
   text: "#222",
   white: "#fff",
   yellow: "#ffd424e6",
-  gray: "#929292",
-  bgPrimary: "#f5f5f500",
-  bgCategory: "#0046ab",
+  green: "#26aa99",
+  gray: "#e8e8e8",
+  grayDark: "#929292",
 };
 
 export const FONTS = {
@@ -53,6 +53,16 @@ export const ICON_BACK: IconIProps = {
   type: "ionicon",
 };
 
+export const ICON_MINUS: IconIProps = {
+  name: "minus",
+  type: "antdesign",
+};
+
+export const ICON_ADD: IconIProps = {
+  name: "add-outline",
+  type: "ionicon",
+};
+
 export const ICON_DOTS_THREE_VERTICAL: IconIProps = {
   name: "dots-three-vertical",
   type: "entypo",
@@ -66,6 +76,41 @@ export const ICON_LIVE: IconIProps = {
   name: "live-tv",
   type: "materialicons",
 };
+
+export const ICON_CLOSE: IconIProps = {
+  name: "close-outline",
+  type: "ionicon",
+};
+
+export const ICON_SUCCESS_CIRCLE: IconIProps = {
+  name: "checkcircle",
+  type: "antdesign",
+};
+export const ICON_ERROR_CIRCLE: IconIProps = {
+  name: "closecircle",
+  type: "antdesign",
+};
+
+export const ICON_WARNING_CIRCLE: IconIProps = {
+  name: "warning",
+  type: "entypo",
+};
+
+export const ICON_INFO_CIRCLE: IconIProps = {
+  name: "infocirlce",
+  type: "antdesign",
+};
+
+export const ICON_ARROW_DOWN: IconIProps = {
+  name: "down",
+  type: "antdesign",
+};
+
+export const ICON_ARROW_NEXT: IconIProps = {
+  name: "navigate-next",
+  type: "materialicons",
+};
+
 export const ICON_HEART = (active: boolean): IconIProps => ({
   name: active ? "heart" : "hearto",
   type: "antdesign",

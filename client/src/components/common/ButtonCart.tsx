@@ -2,16 +2,17 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
 import { ICON_CART, ROUTES } from "../../constants";
-import MyCustomIcon from "./MyCustomIcon";
+import MyCustomIcon from "./icon/MyCustomIcon";
+import { useAppSelector } from "../../hooks/useRedux";
 
 const ButtonCart: React.FC = () => {
-  const value = 3;
+  const products = useAppSelector((state) => state.cart.products);
   const navigation = useNavigation<any>();
 
   return (
     <MyCustomIcon
       {...ICON_CART}
-      badgeValue={value}
+      badgeValue={products.length}
       handlePress={() => navigation.navigate(ROUTES.cart)}
     />
   );

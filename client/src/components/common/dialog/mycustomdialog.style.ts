@@ -3,14 +3,19 @@ import { COLORS } from "../../../constants";
 
 const styles = StyleSheet.create<any>({
   wrapper: {
-    width: "100%",
-    flexDirection: "row",
+    backgroundColor: COLORS.text,
+    paddingVertical: 20,
+    borderRadius: 8,
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    height: 60,
-    bottom: 90,
-    backgroundColor: COLORS.white,
+    gap: 10,
+  },
+  icon: {
+    backgroundColor: COLORS.text,
+  },
+  text: {
+    color: COLORS.white,
   },
 });
 

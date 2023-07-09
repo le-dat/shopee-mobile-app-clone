@@ -47,7 +47,7 @@ const styles = StyleSheet.create<any>({
     fontSize: 16,
   },
   productSellNumber: {
-    fontSize: 12,
+    fontSize: 10,
     padding: 10,
   },
 });

@@ -1,5 +1,6 @@
+import { ScrollView } from "native-base";
 import React from "react";
-import { View, StyleProp, ViewStyle } from "react-native";
+import { StyleProp, ViewStyle } from "react-native";
 import FontWrapper from "./FontWrapper";
 
 interface IProps {
@@ -11,9 +12,9 @@ const PaddingWrapper: React.FC<IProps> = ({ children, style }) => {
   const containerStyle = [style, { paddingHorizontal: 4 }];
 
   return (
-    <View style={containerStyle}>
+    <ScrollView style={containerStyle}>
       <FontWrapper>{children}</FontWrapper>
-    </View>
+    </ScrollView>
   );
 };
 

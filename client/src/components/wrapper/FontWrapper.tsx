@@ -33,7 +33,7 @@ const FontWrapper: React.FC<IProps> = ({ children, style }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<any>({
   wrapper: {
     position: "relative",
     flex: 1,

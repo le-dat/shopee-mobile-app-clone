@@ -1,25 +1,31 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ProductCartIProps } from "../../types/store";
 
 export interface IProps {
   isOpen: boolean;
+  product: ProductCartIProps | null;
 }
 const initialState: IProps = {
   isOpen: false,
+  product: null,
 };
 
 export const sheetSlice = createSlice({
-  name: "cart",
+  name: "sheet",
   initialState,
   reducers: {
-    handleOpenSheet: (state) => {
+    openSheet: (state) => {
       state.isOpen = true;
     },
-    handleCloseSheet: (state) => {
+    closeSheet: (state) => {
       state.isOpen = false;
+    },
+    setProduct: (state, action: PayloadAction<ProductCartIProps>) => {
+      state.product = action.payload;
     },
   },
 });
 
-export const { handleOpenSheet, handleCloseSheet } = sheetSlice.actions;
+export const { openSheet, closeSheet, setProduct } = sheetSlice.actions;
 export default sheetSlice.reducer;

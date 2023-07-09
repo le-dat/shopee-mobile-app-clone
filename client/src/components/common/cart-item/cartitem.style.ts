@@ -1,53 +1,41 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../../constants";
+import { COLORS, FONTS } from "../../../constants";
 
 const styles = StyleSheet.create<any>({
   wrapper: {
+    width: "100%",
     display: "flex",
-    width: "50%",
-    paddingHorizontal: 5,
-    justifyContent: "center",
-  },
-  productItem: (border: boolean) => ({
-    borderColor: border ? COLORS.gray : "transparent",
-    borderWidth: 1,
-    borderRadius: 4,
-    backgroundColor: "#fff",
-    overflow: "hidden",
-    width: "100%",
-    position: "relative",
-  }),
-  productSell: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    zIndex: 1,
-  },
-  productItemImageWrapper: {
-    width: "100%",
-    alignItem: "flex-start",
-    justifyContent: "center",
-    height: 150,
-  },
-  productItemImage: {
-    width: "100%",
-    aspectRadio: 1,
-  },
-  productItemText: {
-    marginBottom: 20,
-  },
-  productItemBottom: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-  },
-  productItemPrice: {
-    color: COLORS.primary,
-    fontSize: 16,
-  },
-  productItemSellNumber: {
-    fontSize: 12,
+    gap: 10,
+    backgroundColor: COLORS.white,
     padding: 10,
+  },
+  imageWrapper: {
+    width: 100,
+  },
+  container: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: 10,
+  },
+  title: {},
+  button: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 5,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    backgroundColor: COLORS.gray,
+  },
+  price: {
+    color: COLORS.primary,
+    fontFamily: FONTS.bold,
   },
 });
 export default styles;

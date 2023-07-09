@@ -1,29 +1,39 @@
 import { Icon } from "@rneui/themed";
 import React from "react";
-import { StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from "react-native";
-import { COLORS } from "../../constants";
+import { StyleProp, Text, TouchableOpacity, View, ViewStyle } from "react-native";
+
+import { COLORS } from "../../../constants";
+import styles from "./mycustomicon.style";
 
 interface IProps {
   name: string;
   type: string;
-  handlePress: () => void;
+  handlePress?: () => void;
+  rounded?: boolean;
   badgeValue?: number;
   color?: string;
+  size?: number;
   style?: StyleProp<ViewStyle>;
 }
 const MyCustomIcon: React.FC<IProps> = ({
   name,
   type,
   handlePress,
+  rounded = false,
   badgeValue = 0,
-  color = "#fff",
+  color = COLORS.white,
+  size,
   style,
 }) => {
-  const containerStyle = [{ padding: 10, borderRadius: 50 }, style];
-
   return (
     <TouchableOpacity onPress={handlePress}>
-      <Icon name={name} type={type} color={color} containerStyle={containerStyle} />
+      <Icon
+        name={name}
+        type={type}
+        color={color}
+        size={size}
+        containerStyle={[styles.icon(rounded), style]}
+      />
 
       {/* badged */}
       {badgeValue > 0 && (
@@ -35,17 +45,4 @@ const MyCustomIcon: React.FC<IProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
-  badge: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    paddingHorizontal: 6,
-    borderRadius: 50,
-    backgroundColor: COLORS.yellow,
-  },
-  text: {
-    color: COLORS.text,
-  },
-});
 export default MyCustomIcon;

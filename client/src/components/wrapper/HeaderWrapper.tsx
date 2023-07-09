@@ -44,7 +44,7 @@ const HeaderWrapper: React.FC<IProps> = ({ isScroll, children }) => {
     </Animated.View>
   );
 };
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<any>({
   wrapper: {
     flexDirection: "row",
     justifyContent: "space-between",

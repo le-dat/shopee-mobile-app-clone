@@ -5,11 +5,11 @@ import Spinner from "react-native-loading-spinner-overlay";
 
 import { useQuery } from "@tanstack/react-query";
 import ButtonCart from "../../components/common/ButtonCart";
-import Error from "../../components/common/Error";
-import MyCustomIcon from "../../components/common/MyCustomIcon";
-import Search from "../../components/common/Search";
+import Error from "../../components/common/error/Error";
+import MyCustomIcon from "../../components/common/icon/MyCustomIcon";
+import Search from "../../components/common/search/Search";
 import Card from "../../components/common/card/Card";
-import TwoRowScrollView from "../../components/common/carousel/TwoColumnScrollView";
+import TwoRowScrollView from "../../components/common/scroll-view/TwoRowScrollView";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import PaddingWrapper from "../../components/wrapper/PaddingWrapper";
@@ -60,7 +60,7 @@ const HomeScreen: React.FC = () => {
           <TwoRowScrollView data={categories} />
         </PaddingWrapper>
 
-        <PaddingWrapper style={{ marginBottom: 150 }}>
+        <PaddingWrapper style={{ marginBottom: 100 }}>
           <View style={styles.productList}>
             {products?.map((product, index) => (
               <Card key={`product-${index}`} product={product} />

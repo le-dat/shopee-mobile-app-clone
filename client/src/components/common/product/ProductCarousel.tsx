@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 
 import { Image } from "react-native";
-import styles from "./itemCarousel.style";
+import styles from "./productcarousel.style";
 
 interface IProps {
   data: string[];
 }
-const ItemCarousel: React.FC<IProps> = ({ data }) => {
+const ProductCarousel: React.FC<IProps> = ({ data }) => {
   const [active, setActive] = useState<number>(0);
 
   useEffect(() => {
@@ -48,4 +48,4 @@ const ItemCarousel: React.FC<IProps> = ({ data }) => {
   );
 };
 
-export default ItemCarousel;
+export default ProductCarousel;

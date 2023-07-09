@@ -5,9 +5,10 @@ import { NativeBaseProvider } from "native-base";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import MyCustomDialog from "./src/components/common/dialog/MyCustomDialog";
 import { store } from "./src/redux/store";
 import Routes from "./src/routes";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
@@ -18,8 +19,9 @@ const App: React.FC = () => {
         <NativeBaseProvider>
           <NavigationContainer>
             <SafeAreaProvider style={{ flex: 1 }}>
-              <Routes />
               <StatusBar style="auto" />
+              <Routes />
+              <MyCustomDialog />
             </SafeAreaProvider>
           </NavigationContainer>
         </NativeBaseProvider>

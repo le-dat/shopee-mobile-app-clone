@@ -1,17 +1,16 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../../constants";
 
-const styles = StyleSheet.create({
-  swiperList: {},
-  swiperItem: {
+const styles = StyleSheet.create<any>({
+  wrapper: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: COLORS.gray,
   },
-  productList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    rowGap: 10,
+  container: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
   },
 });
 

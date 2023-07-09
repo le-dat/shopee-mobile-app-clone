@@ -1,49 +1,61 @@
-import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import { Image, StyleProp, Text, TouchableOpacity, View, ViewStyle } from "react-native";
+import React, { useState } from "react";
+import { StyleProp, Text, TouchableOpacity, View, ViewStyle } from "react-native";
 
-import { ProductIProps } from "../../../types/product";
+import { useNavigation } from "@react-navigation/native";
+import { Icon } from "@rneui/themed";
+import { COLORS, ICON_ARROW_DOWN, ROUTES } from "../../../constants";
+import { useAppDispatch } from "../../../hooks/useRedux";
+import { openSheet } from "../../../redux/features/sheetSlice";
+import { ProductCartIProps } from "../../../types/store";
 import { formatCurrencyVietnam } from "../../../utils/common";
+import MyCustomSheet from "../bottom-sheet/MyCustomSheet";
+import MyCustomImage from "../image/MyCustomImage";
+import SizeRange from "../size-range/SizeRange";
 import styles from "./cartitem.style";
 
 interface IProps {
-  id: number;
-  item: ProductIProps;
+  product: ProductCartIProps;
   style?: StyleProp<ViewStyle>;
 }
-const CartItem: React.FC<IProps> = ({ id, item, style }) => {
+const CartItem: React.FC<IProps> = ({ product, style }) => {
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<any>();
 
-  const store = [2, 3, 4, 5];
+  const [quantity, setQuantity] = useState<number>(1);
 
-  const handleNavigateToItem = () => {
-    // navigation.navigate("Category", { slug: category?.slug });
+  const handleNavigateItemScreen = () => {
+    navigation.navigate(ROUTES.product, { id: product?._id });
+  };
+
+  const handleOpenSheet = () => {
+    dispatch(openSheet());
   };
 
   return (
-    <TouchableOpacity onPress={() => handleNavigateToItem()} style={[styles.wrapper, style]}>
-      <View>
-        <View style={styles.imageWrapper}>
-          <Image
-            source={{ uri: item?.images[0] }}
-            resizeMode="contain"
-            style={styles.image}
-            accessibilityLabel={`category-${id}`}
-          />
-        </View>
-
-        <View style={{ padding: 10, paddingTop: 20 }}>
-          <Text numberOfLines={1} style={styles.productItemText}>
-            {item?.name}
-          </Text>
-
-          <View style={styles.productItemBottom}>
-            <Text numberOfLines={1} style={styles.productItemPrice}>
-              {formatCurrencyVietnam(item?.price)}
-            </Text>
-          </View>
-        </View>
+    <TouchableOpacity onPress={handleNavigateItemScreen} style={[styles.wrapper, style]}>
+      <View style={styles.imageWrapper}>
+        <MyCustomImage url={product?.images[0]} />
       </View>
+
+      <View style={styles.container}>
+        <Text numberOfLines={1} style={styles.title}>
+          {product?.name}
+        </Text>
+
+        <TouchableOpacity style={styles.button} onPress={handleOpenSheet}>
+          <Text numberOfLines={1}>
+            Phân loại: {product?.color}, {product?.size}
+          </Text>
+          <Icon {...ICON_ARROW_DOWN} color={COLORS.text} size={20} />
+        </TouchableOpacity>
+
+        <Text numberOfLines={1} style={styles.price}>
+          {formatCurrencyVietnam(product?.price)}
+        </Text>
+
+        <SizeRange value={quantity} setValue={setQuantity} />
+      </View>
+      <MyCustomSheet product={product} />
     </TouchableOpacity>
   );
 };

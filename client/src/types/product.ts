@@ -10,16 +10,12 @@ export interface ProductIProps {
   sell_number: number;
   price: number;
   original_price: number;
-  size: SizeIProps[];
-  color: ColorIProps[];
-  relative: [ProductIProps];
+  sizes: SharedIProps[];
+  colors: SharedIProps[];
+  relative: ProductIProps[];
 }
 
-export interface SizeIProps {
-  name: string;
-  enable: boolean;
-}
-export interface ColorIProps {
+export interface SharedIProps {
   name: string;
   enable: boolean;
 }

@@ -16,3 +16,8 @@ export interface IconIProps {
     | "simple-line-icon"
     | "zocial";
 }
+
+export interface DialogIProps {
+  title: string;
+  type: "error" | "success" | "warning" | "info";
+}

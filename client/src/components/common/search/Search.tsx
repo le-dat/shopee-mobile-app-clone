@@ -1,9 +1,9 @@
 import { Input, Stack } from "native-base";
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
 
-import { COLORS, ICON_SEARCH } from "../../constants";
-import MyCustomIcon from "./MyCustomIcon";
+import { COLORS, ICON_SEARCH } from "../../../constants";
+import MyCustomIcon from "../icon/MyCustomIcon";
+import styles from "./search.style";
 
 interface IProps {
   placeholder?: string;
@@ -35,16 +35,5 @@ const Search: React.FC<IProps> = ({ placeholder = "Nhập từ khóa..." }) => {
     </Stack>
   );
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#fff",
-    height: 40,
-    borderRadius: 5,
-  },
-});
 
 export default Search;

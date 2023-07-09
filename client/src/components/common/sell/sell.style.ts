@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../../constants";
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<any>({
   productSell: {
     width: 50,
     alignItems: "center",
