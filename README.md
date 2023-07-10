@@ -1,10 +1,12 @@
 # shopee mobile app clone (react-native)
 
-<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot1.jpg" alt="shopee screenshot" width="200" height="whatever">
+<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot1.jpg" alt="shopee screenshot" width="100" height="whatever">
 
-<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot2.jpg" alt="shopee screenshot" width="200" height="whatever">
+<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot2.jpg" alt="shopee screenshot" width="100" height="whatever">
 
-<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot3.jpg" alt="shopee screenshot" width="200" height="whatever">
+<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot3.jpg" alt="shopee screenshot" width="100" height="whatever">
+
+<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot4.jpg" alt="shopee screenshot" width="100" height="whatever">
 
 ### Feature:
 

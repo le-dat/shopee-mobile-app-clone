@@ -1,33 +1,31 @@
-import { useRoute } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useQuery } from "@tanstack/react-query";
 import { ScrollView } from "native-base";
 import React from "react";
-import { Image, Text, View } from "react-native";
-
-import { useQuery } from "@tanstack/react-query";
+import { Text, View } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-import Error from "../../components/common/error/Error";
-import MyCustomIcon from "../../components/common/icon/MyCustomIcon";
-import Search from "../../components/common/search/Search";
-import Card from "../../components/common/card/Card";
+
+import Search from "../../components/shared/search/Search";
+import Card from "../../components/shared/card/Card";
+import Error from "../../components/shared/error/Error";
+import MyCustomIcon from "../../components/shared/icon/MyCustomIcon";
+import MyCustomImage from "../../components/shared/image/MyCustomImage";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
-import PaddingWrapper from "../../components/wrapper/PaddingWrapper";
+import ProductListVerticalWrapper from "../../components/wrapper/ProductListVerticalWrapper";
 import { COLORS, ICON_BACK, ICON_CART, ROUTES } from "../../constants";
 import useIsScroll from "../../hooks/useIsScroll";
 import getCategoryById from "../../services/category/getCategoryById";
 import styles from "./categoryscreen.style";
-
-interface IProps {
-  navigation: StackNavigationProp<any, any>;
-}
+import ButtonThreeDot from "../../components/features/buttons/ButtonThreeDot";
 
 interface RouteParams {
   id: string;
 }
 
-const CategoryScreen: React.FC<IProps> = ({ navigation }) => {
+const CategoryScreen: React.FC = () => {
   const router = useRoute();
+  const navigation = useNavigation<any>();
   const { id } = router.params as RouteParams;
   const { isScroll, handleScroll } = useIsScroll();
 
@@ -47,7 +45,7 @@ const CategoryScreen: React.FC<IProps> = ({ navigation }) => {
         <Search placeholder="Tìm kiếm trong danh mục" />
         <View style={{ flexDirection: "row" }}>
           <MyCustomIcon {...ICON_CART} handlePress={() => navigation.navigate(ROUTES.cart)} />
-          {/* <ButtonThreeDot /> */}
+          <ButtonThreeDot />
         </View>
       </HeaderWrapper>
 
@@ -59,24 +57,22 @@ const CategoryScreen: React.FC<IProps> = ({ navigation }) => {
         {/* introduce */}
         <View style={styles.category}>
           <View style={styles.categoryImageWrapper}>
-            <Image source={{ uri: data?.image }} style={styles.categoryImage} />
+            <MyCustomImage url={data?.image} style={styles.categoryImage} />
           </View>
           <View style={styles.categoryInfo}>
             <Text style={styles.categoryName}>{data?.name}</Text>
           </View>
           <View style={styles.categoryImageWrapper}>
-            <Image source={{ uri: data?.image }} style={styles.categoryImage} />
+            <MyCustomImage url={data?.image} style={styles.categoryImage} />
           </View>
         </View>
 
         {/* items */}
-        <PaddingWrapper style={{ marginBottom: 150 }}>
-          <View style={styles.productList}>
-            {data?.products?.map((item, index) => (
-              <Card key={index} item={item} />
-            ))}
-          </View>
-        </PaddingWrapper>
+        <ProductListVerticalWrapper style={{ marginBottom: 80 }}>
+          {data?.products?.map((product, index) => (
+            <Card key={index} product={product} />
+          ))}
+        </ProductListVerticalWrapper>
       </ScrollView>
     </FontWrapper>
   );

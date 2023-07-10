@@ -5,5 +5,5 @@ export interface CategoryIProps {
   name: string;
   slug?: string;
   image: string;
-  products: ProductIProps[];
+  products: ProductIProps[] | [];
 }

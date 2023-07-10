@@ -19,5 +19,5 @@ export interface IconIProps {
 
 export interface DialogIProps {
   title: string;
-  type: "error" | "success" | "warning" | "info";
+  type: "ERROR" | "SUCCESS" | "WARNING" | "INFO";
 }

@@ -9,12 +9,6 @@ const styles = StyleSheet.create<any>({
     justifyContent: "center",
     alignItems: "center",
   },
-  productList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    rowGap: 10,
-  },
 });
 
 export default styles;

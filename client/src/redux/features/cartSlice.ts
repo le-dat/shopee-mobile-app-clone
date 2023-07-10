@@ -18,7 +18,7 @@ export const cartSlice = createSlice({
     },
 
     removeProduct: (state, action: PayloadAction<UUID_IProps>) => {
-      state.products.filter((p) => p.uuid !== action.payload.uuid);
+      state.products = state.products.filter((p) => p.uuid !== action.payload.uuid);
     },
 
     addProduct: (state, action: PayloadAction<ProductCartIProps>) => {

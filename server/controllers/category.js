@@ -1,5 +1,6 @@
 // Import the Category model
 const Category = require("../models/category");
+const Product = require("../models/product");
 
 // Create a category
 const createCategory = async (req, res) => {
@@ -49,9 +50,19 @@ const getCategoryById = async (req, res) => {
   try {
     const categoryId = req.params.id;
     const category = await Category.findById(categoryId);
+
     if (!category) {
       return res.status(404).json({ message: "Category not found" });
     }
+
+    const products = await Product.find({
+      categories: { $in: categoryId },
+    })
+      .select("-relative -categories")
+      .exec();
+
+    category.products = products;
+
     res.status(200).json({ category });
   } catch (error) {
     console.error(error);

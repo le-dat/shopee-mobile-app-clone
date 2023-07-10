@@ -8,7 +8,7 @@ export interface IProps extends DialogIProps {
 const initialState: IProps = {
   isOpen: false,
   title: "Đã thêm vào giỏ",
-  type: "success",
+  type: "SUCCESS",
 };
 
 export const dialogSlice = createSlice({

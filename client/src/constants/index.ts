@@ -25,10 +25,12 @@ export const TABS = {
   personal: "Tôi",
 };
 export const ROUTES = {
-  home: "Home",
+  ...TABS,
+  main: "Main",
   product: "Product",
   cart: "Cart",
   category: "Category",
+  search: "Search",
 
   message: "Messenger",
   personal: "Personal",

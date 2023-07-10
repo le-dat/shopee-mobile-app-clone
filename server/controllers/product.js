@@ -49,7 +49,12 @@ const getAllProduct = async (req, res) => {
 const getProductById = async (req, res) => {
   try {
     const productId = req.params.id;
-    const product = await Product.findById(productId);
+    const product = await Product.findById(productId)
+      .populate({
+        path: "categories",
+        select: "name _id",
+      })
+      .exec();
 
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
@@ -111,11 +116,13 @@ const deleteProductId = async (req, res) => {
 
 const searchProductByName = async (req, res) => {
   try {
-    const searchQuery = req.query.q;
+    const searchQuery = req.query.name;
+    console.log(searchQuery);
+
     const products = await Product.find({
       name: { $regex: searchQuery, $options: "i" },
     });
-    res.json({ status: true, products });
+
     res.status(200).json({ products });
   } catch (error) {
     console.error(error);

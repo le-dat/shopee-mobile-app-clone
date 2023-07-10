@@ -1,11 +1,12 @@
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
 
-import CartItem from "../../components/common/cart-item/CartItem";
+import CartItem from "../../components/shared/cart-item/CartItem";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import { useAppSelector } from "../../hooks/useRedux";
 import styles from "./cartscreen.style";
 import SwipeToDeleteItemWrapper from "../../components/wrapper/SwipeToDeleteItemWrapper";
+import CartEmpty from "../../components/shared/cart-empty/CartEmpty";
 
 const CartScreen: React.FC = () => {
   const products = useAppSelector((state) => state.cart.products);
@@ -21,11 +22,8 @@ const CartScreen: React.FC = () => {
               </SwipeToDeleteItemWrapper>
             ))
           ) : (
-            <Text>Giỏ hàng trống</Text>
+            <CartEmpty />
           )}
-          <Text>Giỏ hàng trống</Text>
-          <Text>Giỏ hàng trống</Text>
-          <Text>Giỏ hàng trống</Text>
         </View>
       </ScrollView>
     </FontWrapper>

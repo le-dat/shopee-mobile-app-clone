@@ -1,18 +1,19 @@
 import { useNavigation } from "@react-navigation/native";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Image, ScrollView, View } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
-import { useQuery } from "@tanstack/react-query";
-import ButtonCart from "../../components/common/ButtonCart";
-import Error from "../../components/common/error/Error";
-import MyCustomIcon from "../../components/common/icon/MyCustomIcon";
-import Search from "../../components/common/search/Search";
-import Card from "../../components/common/card/Card";
-import TwoRowScrollView from "../../components/common/scroll-view/TwoRowScrollView";
+import ButtonCart from "../../components/features/buttons/ButtonCart";
+import Search from "../../components/shared/search/Search";
+import Card from "../../components/shared/card/Card";
+import Error from "../../components/shared/error/Error";
+import MyCustomIcon from "../../components/shared/icon/MyCustomIcon";
+import TwoRowScrollView from "../../components/shared/scroll-view/TwoRowScrollView";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import PaddingWrapper from "../../components/wrapper/PaddingWrapper";
+import ProductListVerticalWrapper from "../../components/wrapper/ProductListVerticalWrapper";
 import SwiperWrapper from "../../components/wrapper/SwiperWrapper";
 import { ICON_MESSAGE, ROUTES } from "../../constants";
 import useIsScroll from "../../hooks/useIsScroll";
@@ -60,13 +61,13 @@ const HomeScreen: React.FC = () => {
           <TwoRowScrollView data={categories} />
         </PaddingWrapper>
 
-        <PaddingWrapper style={{ marginBottom: 100 }}>
-          <View style={styles.productList}>
+        <View style={{ marginBottom: 80 }}>
+          <ProductListVerticalWrapper>
             {products?.map((product, index) => (
               <Card key={`product-${index}`} product={product} />
             ))}
-          </View>
-        </PaddingWrapper>
+          </ProductListVerticalWrapper>
+        </View>
       </ScrollView>
     </FontWrapper>
   );

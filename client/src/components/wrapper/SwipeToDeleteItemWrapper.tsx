@@ -16,7 +16,7 @@ const SwipeToDeleteItemWrapper: React.FC<IProps> = ({ product, children }) => {
 
   const handleRemoveProduct = () => {
     dispatch(removeProduct({ uuid: product.uuid }));
-    dispatch(handleOpenDialog({ title: "Đã xóa sản phẩm", type: "success" }));
+    dispatch(handleOpenDialog({ title: "Đã xóa sản phẩm", type: "SUCCESS" }));
   };
 
   const panResponder = useRef(

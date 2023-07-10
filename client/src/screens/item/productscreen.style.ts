@@ -17,11 +17,6 @@ const styles = StyleSheet.create<any>({
     alignItems: "center",
   },
   icon: {},
-  productList: {
-    padding: 10,
-    marginBottom: 100,
-    backgroundColor: COLORS.white,
-  },
 });
 
 export default styles;

@@ -7,7 +7,7 @@ interface IProps {
 
 const getCategoryById = async (id: string) => {
   const response = await httpRequest.get<IProps>(`/categories/${id}`);
-  return response.data;
+  return response.data.category;
 };
 
 export default getCategoryById;
