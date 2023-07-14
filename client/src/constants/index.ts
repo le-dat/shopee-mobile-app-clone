@@ -113,6 +113,16 @@ export const ICON_ARROW_NEXT: IconIProps = {
   type: "materialicons",
 };
 
+export const ICON_CAMERA: IconIProps = {
+  name: "camerao",
+  type: "antdesign",
+};
+
+export const ICON_FILTER: IconIProps = {
+  name: "filter",
+  type: "antdesign",
+};
+
 export const ICON_HEART = (active: boolean): IconIProps => ({
   name: active ? "heart" : "hearto",
   type: "antdesign",
@@ -137,4 +147,7 @@ export const ICON_PERSONAL = (active: boolean): IconIProps => ({
   type: "ionicon",
 });
 
+export const IMAGES = {
+  empty: require("../assets/images/empty.png"),
+};
 export const API_URL = "https://shopee-mobile-app-clone-server.onrender.com";

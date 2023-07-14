@@ -1,14 +1,14 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { NativeBaseProvider } from "native-base";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import MyCustomDialog from "./src/components/features/dialog/MyCustomDialog";
+
 import { store } from "./src/redux/store";
 import Routes from "./src/routes";
+import MyCustomDialog from "./src/components/shared/MyCustomDialog";
+import { NavigationContainer } from "@react-navigation/native";
 
 const queryClient = new QueryClient();
 

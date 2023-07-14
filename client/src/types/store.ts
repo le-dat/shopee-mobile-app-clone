@@ -8,4 +8,5 @@ export interface ProductCartIProps extends UUID_IProps, ProductIProps {
   size: string;
   color: string;
   quantity: number;
+  isChecked: boolean;
 }

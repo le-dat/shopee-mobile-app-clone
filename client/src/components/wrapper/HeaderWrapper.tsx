@@ -1,15 +1,17 @@
 import React, { useEffect, useRef } from "react";
-import { Animated } from "react-native";
+import { Animated, StyleProp } from "react-native";
 
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../constants";
+import { ViewStyle } from "react-native";
 
 interface IProps {
   isScroll?: boolean;
   children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 }
 
-const HeaderWrapper: React.FC<IProps> = ({ isScroll, children }) => {
+const HeaderWrapper: React.FC<IProps> = ({ isScroll, children, style }) => {
   const headerBackgroundOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -38,6 +40,7 @@ const HeaderWrapper: React.FC<IProps> = ({ isScroll, children }) => {
             outputRange: ["red", COLORS.primary],
           }),
         },
+        style,
       ]}
     >
       {children}

@@ -2,35 +2,6 @@
 const Category = require("../models/category");
 const Product = require("../models/product");
 
-// Create a category
-const createCategory = async (req, res) => {
-  try {
-    const categoryData = req.body;
-    console.log(categoryData);
-    const category = new Category(categoryData);
-    await category.save();
-    res.status(200).json({ category, message: "Create a category successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
-};
-
-// Create many categories
-const createManyCategory = async (req, res) => {
-  try {
-    const categories = req.body; // Assuming an array of product objects is sent in the request body
-
-    // Insert the array of categories into the Category collection
-    const insertedCategories = await Category.insertMany(categories);
-
-    res.json({ message: "Insert Categories added successfully", category: insertedCategories });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
-};
-
 // Get all categories
 const getAllCategory = async (req, res) => {
   try {
@@ -70,6 +41,49 @@ const getCategoryById = async (req, res) => {
   }
 };
 
+const searchCategoryByName = async (req, res) => {
+  try {
+    const searchQuery = req.query.name;
+    const categories = await Category.find({
+      name: { $regex: searchQuery, $options: "i" },
+    });
+
+    res.status(200).json({ categories });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Create a category
+const createCategory = async (req, res) => {
+  try {
+    const categoryData = req.body;
+    console.log(categoryData);
+    const category = new Category(categoryData);
+    await category.save();
+    res.status(200).json({ category, message: "Create a category successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Create many categories
+const createManyCategory = async (req, res) => {
+  try {
+    const categories = req.body; // Assuming an array of product objects is sent in the request body
+
+    // Insert the array of categories into the Category collection
+    const insertedCategories = await Category.insertMany(categories);
+
+    res.json({ message: "Insert Categories added successfully", category: insertedCategories });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 // Update a category
 const updateCategory = async (req, res) => {
   try {
@@ -102,10 +116,11 @@ const deleteCategory = async (req, res) => {
 };
 
 module.exports = {
-  createCategory,
-  createManyCategory,
   getAllCategory,
   getCategoryById,
+  searchCategoryByName,
+  createCategory,
+  createManyCategory,
   updateCategory,
   deleteCategory,
 };

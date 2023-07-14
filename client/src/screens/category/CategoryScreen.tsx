@@ -1,23 +1,21 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { useQuery } from "@tanstack/react-query";
-import { ScrollView } from "native-base";
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-
-import Search from "../../components/shared/search/Search";
-import Card from "../../components/shared/card/Card";
-import Error from "../../components/shared/error/Error";
-import MyCustomIcon from "../../components/shared/icon/MyCustomIcon";
-import MyCustomImage from "../../components/shared/image/MyCustomImage";
+import Error from "../../components/shared/Error";
+import MyCustomImage from "../../components/shared/MyCustomImage";
+import SearchUI from "../../components/shared/SearchUI";
+import ButtonBack from "../../components/shared/buttons/ButtonBack";
+import ButtonCart from "../../components/shared/buttons/ButtonCart";
+import ButtonThreeDot from "../../components/shared/buttons/ButtonThreeDot";
+import ListCardVertical from "../../components/shared/card/ListCardVertical";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
-import ProductListVerticalWrapper from "../../components/wrapper/ProductListVerticalWrapper";
-import { COLORS, ICON_BACK, ICON_CART, ROUTES } from "../../constants";
+import ScrollRefreshWrapper from "../../components/wrapper/ScrollRefreshWrapper";
+import { COLORS } from "../../constants";
 import useIsScroll from "../../hooks/useIsScroll";
 import getCategoryById from "../../services/category/getCategoryById";
-import styles from "./categoryscreen.style";
-import ButtonThreeDot from "../../components/features/buttons/ButtonThreeDot";
 
 interface RouteParams {
   id: string;
@@ -25,33 +23,31 @@ interface RouteParams {
 
 const CategoryScreen: React.FC = () => {
   const router = useRoute();
-  const navigation = useNavigation<any>();
   const { id } = router.params as RouteParams;
   const { isScroll, handleScroll } = useIsScroll();
 
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: [`category-${id}`],
     queryFn: () => getCategoryById(id),
   });
 
   if (isLoading) return <Spinner visible={isLoading} textContent={"Loading..."} />;
-  if (!data || error) return <Error handlePress={refetch} />;
+  if (!data || isError) return <Error handlePress={refetch} />;
 
   return (
     <FontWrapper>
       <HeaderWrapper isScroll={isScroll}>
-        <MyCustomIcon {...ICON_BACK} handlePress={() => navigation.goBack()} />
-
-        <Search placeholder="Tìm kiếm trong danh mục" />
+        <ButtonBack />
+        <SearchUI placeholder="Tìm kiếm trong danh mục" />
         <View style={{ flexDirection: "row" }}>
-          <MyCustomIcon {...ICON_CART} handlePress={() => navigation.navigate(ROUTES.cart)} />
+          <ButtonCart />
           <ButtonThreeDot />
         </View>
       </HeaderWrapper>
 
-      <ScrollView
+      <ScrollRefreshWrapper
         onScroll={handleScroll}
-        scrollEventThrottle={16}
+        onRefresh={refetch}
         style={{ backgroundColor: COLORS.gray }}
       >
         {/* introduce */}
@@ -68,14 +64,44 @@ const CategoryScreen: React.FC = () => {
         </View>
 
         {/* items */}
-        <ProductListVerticalWrapper style={{ marginBottom: 80 }}>
-          {data?.products?.map((product, index) => (
-            <Card key={index} product={product} />
-          ))}
-        </ProductListVerticalWrapper>
-      </ScrollView>
+        <ListCardVertical products={data.products} />
+      </ScrollRefreshWrapper>
     </FontWrapper>
   );
 };
+
+const styles = StyleSheet.create<any>({
+  wrapper: {},
+  category: {
+    backgroundColor: COLORS.primary,
+    padding: 14,
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    gap: 20,
+    marginBottom: 20,
+  },
+  categoryImageWrapper: {
+    width: 50,
+    height: 50,
+  },
+  categoryImage: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 50,
+  },
+  categoryInfo: {},
+  categoryName: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: COLORS.white,
+  },
+  productList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: 10,
+  },
+});
 
 export default CategoryScreen;

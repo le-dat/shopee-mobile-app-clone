@@ -1,12 +1,13 @@
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
-import CartItem from "../../components/shared/cart-item/CartItem";
 import FontWrapper from "../../components/wrapper/FontWrapper";
-import { useAppSelector } from "../../hooks/useRedux";
-import styles from "./cartscreen.style";
 import SwipeToDeleteItemWrapper from "../../components/wrapper/SwipeToDeleteItemWrapper";
-import CartEmpty from "../../components/shared/cart-empty/CartEmpty";
+import { COLORS } from "../../constants";
+import { useAppSelector } from "../../hooks/useRedux";
+import BottomCheckCart from "./components/BottomCheckCart";
+import Empty from "./components/Empty";
+import Item from "./components/Item";
 
 const CartScreen: React.FC = () => {
   const products = useAppSelector((state) => state.cart.products);
@@ -18,16 +19,32 @@ const CartScreen: React.FC = () => {
           {products.length > 0 ? (
             products.map((product) => (
               <SwipeToDeleteItemWrapper key={`product-${product._id}`} product={product}>
-                <CartItem key={`product-${product._id}`} product={product} />
+                <Item key={`product-${product._id}`} product={product} />
               </SwipeToDeleteItemWrapper>
             ))
           ) : (
-            <CartEmpty />
+            <Empty />
           )}
         </View>
       </ScrollView>
+
+      {products.length > 0 && <BottomCheckCart products={products} />}
     </FontWrapper>
   );
 };
+
+const styles = StyleSheet.create<any>({
+  wrapper: {
+    flex: 1,
+    backgroundColor: COLORS.gray,
+  },
+  container: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
+    position: "relative",
+  },
+});
 
 export default CartScreen;

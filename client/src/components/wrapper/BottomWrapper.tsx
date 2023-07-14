@@ -16,7 +16,6 @@ const styles = StyleSheet.create<any>({
   wrapper: {
     width: "100%",
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
     position: "absolute",
     height: 60,

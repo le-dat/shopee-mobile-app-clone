@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 
-import TabScreens from "../components/features/navigations/TabNavigation";
 import CartScreen from "../screens/cart/CartScreen";
 import CategoryScreen from "../screens/category/CategoryScreen";
-import ProductScreen from "../screens/item/ProductScreen";
 import MessengerScreen from "../screens/message/MessengerScreen";
-import SearchScreen from "../screens/search/SearchScreen";
+import ProductScreen from "../screens/product/ProductScreen";
+import SearchScreen from "../screens/search-step-1/SearchScreen";
+import TabNavigation from "./TabNavigation";
 
 type RootStackParamList = {
   Main: undefined;
@@ -22,7 +22,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Routes: React.FC = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Main" component={TabScreens} options={{ headerShown: false }} />
+      <Stack.Screen name="Main" component={TabNavigation} options={{ headerShown: false }} />
       <Stack.Screen name="Product" component={ProductScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Category" component={CategoryScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Search" component={SearchScreen} options={{ headerShown: false }} />

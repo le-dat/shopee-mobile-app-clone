@@ -2,8 +2,8 @@ import React, { useRef } from "react";
 import { Animated, PanResponder, View } from "react-native";
 
 import { useAppDispatch } from "../../hooks/useRedux";
-import { removeProduct } from "../../redux/features/cartSlice";
-import { handleOpenDialog } from "../../redux/features/dialogSlice";
+import { removeProduct } from "../../redux/reducers/cartSlice";
+import { openDialog } from "../../redux/reducers/dialogSlice";
 import { ProductCartIProps } from "../../types/store";
 
 interface IProps {
@@ -16,7 +16,7 @@ const SwipeToDeleteItemWrapper: React.FC<IProps> = ({ product, children }) => {
 
   const handleRemoveProduct = () => {
     dispatch(removeProduct({ uuid: product.uuid }));
-    dispatch(handleOpenDialog({ title: "Đã xóa sản phẩm", type: "SUCCESS" }));
+    dispatch(openDialog({ title: "Đã xóa sản phẩm", type: "SUCCESS" }));
   };
 
   const panResponder = useRef(
