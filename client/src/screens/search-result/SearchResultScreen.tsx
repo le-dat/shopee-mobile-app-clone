@@ -5,26 +5,26 @@ import { StyleSheet } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
 import Error from "../../components/shared/Error";
+import SearchUI from "../../components/shared/SearchUI";
 import MyCustomButton from "../../components/shared/buttons/MyCustomButton";
 import ListCardVertical from "../../components/shared/card/ListCardVertical";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import ScrollRefreshWrapper from "../../components/wrapper/ScrollRefreshWrapper";
-import { COLORS, ICON_BACK } from "../../constants";
+import { COLORS, ICON_BACK, ICON_FILTER } from "../../constants";
 import searchProductByName from "../../services/product/searchProductByName";
-import SearchInput from "../search-step-1/components/SearchInput";
 
 interface RouteParams {
   name: string;
 }
 
-const SearchScreen: React.FC = () => {
+const SearchResultScreen: React.FC = () => {
   const router = useRoute();
   const navigation = useNavigation<any>();
   const { name } = router.params as RouteParams;
 
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: [`list-product-${name}`],
+    queryKey: [`product-${name}`],
     queryFn: () => searchProductByName(name),
   });
 
@@ -43,7 +43,8 @@ const SearchScreen: React.FC = () => {
           handlePress={() => navigation.goBack()}
           color={COLORS.text}
         />
-        <SearchInput />
+        <SearchUI placeholder={name} />
+        <MyCustomButton {...ICON_FILTER} handlePress={handleFilter} color={COLORS.text} />
       </HeaderWrapper>
 
       <ScrollRefreshWrapper onRefresh={refetch} style={styles.container}>
@@ -68,4 +69,4 @@ const styles = StyleSheet.create<any>({
     borderColor: COLORS.gray,
   },
 });
-export default SearchScreen;
+export default SearchResultScreen;

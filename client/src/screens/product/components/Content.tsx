@@ -3,7 +3,8 @@ import React from "react";
 import { Text, View } from "react-native";
 
 import Sell from "../../../components/shared/Sell";
-import ButtonMessage from "../../../components/shared/buttons/ButtonMessage";
+import MyCustomButton from "../../../components/shared/buttons/MyCustomButton";
+import { COLORS, ICON_MESSAGE, ROUTES } from "../../../constants";
 import { ProductIProps } from "../../../types/product";
 import { formatCurrencyVietnam, formatSellNumber } from "../../../utils/common";
 import ButtonHeart from "./ButtonHeart";
@@ -39,7 +40,11 @@ const Content: React.FC<IProps> = ({ data }) => {
         <Text>Đã bán {formatSellNumber(data?.sell_number)}</Text>
         <View style={{ flexDirection: "row" }}>
           <ButtonHeart />
-          <ButtonMessage />
+          <MyCustomButton
+            {...ICON_MESSAGE}
+            handlePress={() => navigation.navigate(ROUTES.message)}
+            color={COLORS.text}
+          />
         </View>
       </View>
     </View>

@@ -18,7 +18,6 @@ const styles = StyleSheet.create<any>({
     flexDirection: "row",
     alignItems: "center",
     position: "absolute",
-    height: 60,
     bottom: 0,
     backgroundColor: COLORS.green,
   },

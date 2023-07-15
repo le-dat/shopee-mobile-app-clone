@@ -1,19 +1,43 @@
 import { Input, Stack, View } from "native-base";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
+
 import MyCustomButton from "../../../components/shared/buttons/MyCustomButton";
-import { COLORS, ICON_CAMERA, ICON_SEARCH } from "../../../constants";
+import { COLORS, ICON_CAMERA, ICON_SEARCH, ROUTES } from "../../../constants";
+import useDebounce from "../../../hooks/useDebounce";
+import { useNavigation } from "@react-navigation/native";
 
 interface IProps {
+  queries: string;
+  setQueries: React.Dispatch<React.SetStateAction<string>>;
   placeholder?: string;
 }
-const SearchInput: React.FC<IProps> = ({ placeholder = "Nhập từ khóa..." }) => {
-  const [value, setValue] = useState<string>("");
+const SearchInput: React.FC<IProps> = ({
+  placeholder = "Nhập từ khóa...",
+  queries,
+  setQueries,
+}) => {
+  const navigation = useNavigation<any>();
+  const [searchValue, setSearchValue] = useState<string>("");
+  const debounce = useDebounce({ value: searchValue });
+
+  const handleNavigationToSearchResult = (name: string) => {
+    navigation.navigate(ROUTES.searchResult, { name });
+  };
 
   const handleSearch = (text: string) => {
-    setValue(text);
+    if (!text.startsWith(" ")) {
+      setSearchValue(text);
+    }
   };
+
+  useEffect(() => {
+    if (!debounce.trim()) {
+      setQueries("");
+    } else {
+      setQueries(debounce);
+    }
+  }, [debounce]);
 
   return (
     <View style={styles.wrapper}>
@@ -21,7 +45,7 @@ const SearchInput: React.FC<IProps> = ({ placeholder = "Nhập từ khóa..." })
         <Input
           size="md"
           variant="unstyled"
-          value={value}
+          value={searchValue}
           onChangeText={handleSearch}
           placeholder={placeholder}
           style={styles.input}
@@ -37,7 +61,7 @@ const SearchInput: React.FC<IProps> = ({ placeholder = "Nhập từ khóa..." })
       </Stack>
       <MyCustomButton
         {...ICON_SEARCH}
-        handlePress={() => console.log("ICON_SEARCH")}
+        handlePress={() => handleNavigationToSearchResult(searchValue)}
         color={COLORS.white}
         style={styles.iconSearch}
       />

@@ -31,6 +31,7 @@ export const ROUTES = {
   cart: "Cart",
   category: "Category",
   search: "Search",
+  searchResult: "SearchResult",
 
   message: "Messenger",
   personal: "Personal",

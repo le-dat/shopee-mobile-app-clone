@@ -11,6 +11,7 @@ import SearchUI from "../../components/shared/SearchUI";
 import ButtonCart from "../../components/shared/buttons/ButtonCart";
 import ButtonThreeDot from "../../components/shared/buttons/ButtonThreeDot";
 import MyCustomButton from "../../components/shared/buttons/MyCustomButton";
+import Card from "../../components/shared/card/Card";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import HeadingWrapper from "../../components/wrapper/HeadingWrapper";
@@ -21,7 +22,6 @@ import getProductById from "../../services/product/getProductById";
 import BottomAction from "./components/BottomAction";
 import Carousel from "./components/Carousel";
 import Content from "./components/Content";
-import Card from "../../components/shared/card/Card";
 
 interface RouteParams {
   id: string;
@@ -67,7 +67,7 @@ const ProductScreen: React.FC = () => {
         <Content data={data} />
         {/* product relative */}
         {data?.relative?.length > 0 && (
-          <View>
+          <View style={{ paddingBottom: 80 }}>
             <HeadingWrapper>
               <Text style={styles.title}>Sản phẩm liên quan</Text>
               <TouchableOpacity onPress={() => handleNavigateToCategory()} style={styles.subTitle}>
@@ -98,7 +98,6 @@ const styles = StyleSheet.create<any>({
   container: {
     flex: 1,
     backgroundColor: COLORS.gray,
-    marginBottom: 80,
   },
   title: {
     flex: 1,

@@ -9,10 +9,10 @@ const getAllCategory = async (req, res) => {
       .populate({ path: "products", select: "-categories -__v" })
       .exec();
 
-    res.status(200).json({ categories });
+    return res.status(200).json({ categories });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -34,10 +34,10 @@ const getCategoryById = async (req, res) => {
 
     category.products = products;
 
-    res.status(200).json({ category });
+    return res.status(200).json({ category });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -48,10 +48,10 @@ const searchCategoryByName = async (req, res) => {
       name: { $regex: searchQuery, $options: "i" },
     });
 
-    res.status(200).json({ categories });
+    return res.status(200).json({ categories });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -62,10 +62,10 @@ const createCategory = async (req, res) => {
     console.log(categoryData);
     const category = new Category(categoryData);
     await category.save();
-    res.status(200).json({ category, message: "Create a category successfully" });
+    return res.status(200).json({ category, message: "Create a category successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -77,10 +77,13 @@ const createManyCategory = async (req, res) => {
     // Insert the array of categories into the Category collection
     const insertedCategories = await Category.insertMany(categories);
 
-    res.json({ message: "Insert Categories added successfully", category: insertedCategories });
+    return res.json({
+      message: "Insert Categories added successfully",
+      category: insertedCategories,
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -93,10 +96,10 @@ const updateCategory = async (req, res) => {
     if (!category) {
       return res.status(404).json({ message: "Category not found" });
     }
-    res.status(200).json({ category, message: "Update a category successfully" });
+    return res.status(200).json({ category, message: "Update a category successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -108,10 +111,10 @@ const deleteCategory = async (req, res) => {
     if (!category) {
       return res.status(404).json({ message: "Category not found" });
     }
-    res.status(200).json({ message: "Delete a category successfully" });
+    return res.status(200).json({ message: "Delete a category successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
