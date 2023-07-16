@@ -21,7 +21,7 @@ const ListCardVertical: React.FC<IProps> = ({ products, style }) => {
 
 const styles = StyleSheet.create<any>({
   wrapper: {
-    padding: 10,
+    padding: 5,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",

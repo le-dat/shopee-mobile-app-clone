@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from "react-native";
-import Spinner from "react-native-loading-spinner-overlay";
 
 import Error from "../../components/shared/Error";
 import MyCustomButton from "../../components/shared/buttons/MyCustomButton";
@@ -10,20 +9,25 @@ import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import ScrollRefreshWrapper from "../../components/wrapper/ScrollRefreshWrapper";
 import { COLORS, ICON_BACK, ROUTES } from "../../constants";
+import getCategories from "../../services/category/getCategories";
 import searchCategoryByName from "../../services/category/searchCategoryByName";
 import SearchInput from "./components/SearchInput";
+import { useAppSelector } from "../../hooks/useRedux";
 
-const SearchResultScreen: React.FC = () => {
+const SearchScreen: React.FC = () => {
   const navigation = useNavigation<any>();
-  const [queries, setQueries] = useState<string>("");
+  const { name } = useAppSelector((state) => state.query);
 
   const handleNavigationToCategory = (id: string) => {
     navigation.navigate(ROUTES.category, { id });
   };
 
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: [`category-${JSON.stringify(queries)}`],
-    queryFn: () => searchCategoryByName(queries),
+    queryKey: [`search-${JSON.stringify(name)}`],
+    queryFn: () => {
+      if (name.length > 0) return searchCategoryByName(name);
+      return getCategories();
+    },
   });
 
   if (isError) return <Error handlePress={refetch} />;
@@ -36,7 +40,7 @@ const SearchResultScreen: React.FC = () => {
           handlePress={() => navigation.goBack()}
           color={COLORS.text}
         />
-        <SearchInput queries={queries} setQueries={setQueries} />
+        <SearchInput />
       </HeaderWrapper>
 
       <ScrollRefreshWrapper onRefresh={refetch} style={styles.container}>
@@ -62,6 +66,9 @@ const styles = StyleSheet.create<any>({
     backgroundColor: COLORS.white,
   },
   container: {},
+  empty: {
+    textAlign: "center",
+  },
   results: {},
   result: {
     color: COLORS.text,
@@ -71,4 +78,4 @@ const styles = StyleSheet.create<any>({
     borderColor: COLORS.gray,
   },
 });
-export default SearchResultScreen;
+export default SearchScreen;

@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
-import { Input, Stack } from "native-base";
-import React, { useRef } from "react";
-import { StyleSheet } from "react-native";
+import { Text } from "@rneui/themed";
+import React from "react";
+import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 
 import { COLORS, ICON_SEARCH, ROUTES } from "../../constants";
 import MyCustomButton from "./buttons/MyCustomButton";
@@ -10,44 +10,41 @@ interface IProps {
   placeholder?: string;
 }
 const SearchUI: React.FC<IProps> = ({ placeholder = "Nhập từ khóa..." }) => {
-  const inputRef = useRef(null);
   const navigation = useNavigation<any>();
 
-  const handleFocus = () => {
-    if (inputRef.current) {
-      navigation.navigate(ROUTES.search);
-    }
+  const handlePress = () => {
+    navigation.navigate(ROUTES.search);
   };
 
   return (
-    <Stack style={styles.wrapper}>
-      <Input
-        ref={inputRef}
-        size="md"
-        variant="unstyled"
-        onFocus={handleFocus}
-        leftElement={
-          <MyCustomButton
-            {...ICON_SEARCH}
-            handlePress={() => console.log("ICON_SEARCH")}
-            color={COLORS.text}
-            style={{ paddingLeft: 10, paddingRight: 0 }}
-          />
-        }
-        placeholder={placeholder}
-      />
-    </Stack>
+    <TouchableWithoutFeedback onPress={handlePress}>
+      <View style={styles.button}>
+        <MyCustomButton
+          {...ICON_SEARCH}
+          handlePress={() => console.log("ICON_SEARCH")}
+          color={COLORS.text}
+          size={20}
+          style={{ paddingLeft: 10, paddingRight: 0 }}
+        />
+        <Text>{placeholder}</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create<any>({
-  wrapper: {
+  button: {
     flex: 1,
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#fff",
-    height: 40,
+    justifyContent: "flex-start",
+    gap: 10,
+    backgroundColor: COLORS.white,
     borderRadius: 5,
+    borderWidth: 1,
+    borderColor: COLORS.primary,
   },
 });
 

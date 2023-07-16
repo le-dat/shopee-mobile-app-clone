@@ -2,27 +2,25 @@ import { Input, Stack, View } from "native-base";
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
+import { useNavigation } from "@react-navigation/native";
 import MyCustomButton from "../../../components/shared/buttons/MyCustomButton";
 import { COLORS, ICON_CAMERA, ICON_SEARCH, ROUTES } from "../../../constants";
 import useDebounce from "../../../hooks/useDebounce";
-import { useNavigation } from "@react-navigation/native";
+import { useAppDispatch } from "../../../hooks/useRedux";
+import { setQueries } from "../../../redux/reducers/querySlice";
 
 interface IProps {
-  queries: string;
-  setQueries: React.Dispatch<React.SetStateAction<string>>;
   placeholder?: string;
 }
-const SearchInput: React.FC<IProps> = ({
-  placeholder = "Nhập từ khóa...",
-  queries,
-  setQueries,
-}) => {
+const SearchInput: React.FC<IProps> = ({ placeholder = "Nhập từ khóa..." }) => {
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<any>();
   const [searchValue, setSearchValue] = useState<string>("");
   const debounce = useDebounce({ value: searchValue });
 
-  const handleNavigationToSearchResult = (name: string) => {
-    navigation.navigate(ROUTES.searchResult, { name });
+  const handleNavigationToSearchResult = () => {
+    dispatch(setQueries({ name: searchValue }));
+    navigation.navigate(ROUTES.searchResult);
   };
 
   const handleSearch = (text: string) => {
@@ -33,9 +31,9 @@ const SearchInput: React.FC<IProps> = ({
 
   useEffect(() => {
     if (!debounce.trim()) {
-      setQueries("");
+      dispatch(setQueries({ name: "" }));
     } else {
-      setQueries(debounce);
+      dispatch(setQueries({ name: debounce }));
     }
   }, [debounce]);
 
@@ -61,7 +59,7 @@ const SearchInput: React.FC<IProps> = ({
       </Stack>
       <MyCustomButton
         {...ICON_SEARCH}
-        handlePress={() => handleNavigationToSearchResult(searchValue)}
+        handlePress={handleNavigationToSearchResult}
         color={COLORS.white}
         style={styles.iconSearch}
       />

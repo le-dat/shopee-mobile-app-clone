@@ -6,7 +6,8 @@ interface IProps {
 }
 
 const searchProductByName = async (name: string) => {
-  const response = await httpRequest.get<IProps>(`/products/search?name=${name}`);
+  const query = new URLSearchParams({ name });
+  const response = await httpRequest.get<IProps>(`/products/search?${query}`);
   return response.data.products;
 };
 

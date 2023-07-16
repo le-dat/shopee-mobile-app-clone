@@ -67,40 +67,45 @@ const searchProductByName = async (req, res) => {
   }
 };
 
-// filter product
 const filterProduct = async (req, res) => {
   try {
-    const { categories, price, location } = req.query;
+    const { name, price, createdAt, sell_number } = req.query;
 
-    // Create a filter object to build the MongoDB query
-    const filter = {};
+    let products = await Product.find({
+      name: { $regex: name, $options: "i" },
+    });
 
-    // Add category filter if provided
-    if (categories) {
-      const categoryArray = categories.split(","); // Split the categories string into an array
-      filter.categories = { $in: categoryArray }; // Match products with any of the provided categories
+    // price
+    if (price === "asc") {
+      products = products.sort((a, b) => a.price - b.price);
+    }
+    if (price === "desc") {
+      products = products.sort((a, b) => b.price - a.price);
     }
 
-    // Add price filter if provided
-    if (price) {
-      const priceRange = price.split("-"); // Split the price range string into an array
-      const minPrice = parseInt(priceRange[0], 10); // Minimum price
-      const maxPrice = parseInt(priceRange[1], 10); // Maximum price
-      filter.price = { $gte: minPrice, $lte: maxPrice }; // Match products within the price range
+    // createdAt
+    if (createdAt === "asc") {
+      products = products.sort((a, b) => a.createdAt - b.createdAt);
+    }
+    if (createdAt === "desc") {
+      products = products.sort((a, b) => b.createdAt - a.createdAt);
     }
 
-    // Add location filter if provided
-    if (location) {
-      filter.location = location;
+    // sell_number
+    if (sell_number === "asc") {
+      products = products.sort((a, b) => a.sell_number - b.sell_number);
+    }
+    if (sell_number === "desc") {
+      products = products.sort((a, b) => b.sell_number - a.sell_number);
     }
 
-    const filteredProducts = await Product.find(filter);
-    res.json({ status: true, products: filteredProducts });
+    res.json({ products });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ status: false, msg: "Server error" });
+    res.status(500).json({ message: "Server error" });
   }
 };
+
 // Create a product
 const createProduct = async (req, res) => {
   try {

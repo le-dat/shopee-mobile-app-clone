@@ -5,16 +5,16 @@ import CartScreen from "../screens/cart/CartScreen";
 import CategoryScreen from "../screens/category/CategoryScreen";
 import MessengerScreen from "../screens/message/MessengerScreen";
 import ProductScreen from "../screens/product/ProductScreen";
+import SearchResultScreen from "../screens/search-result/SearchResultScreen";
 import SearchScreen from "../screens/search/SearchScreen";
 import TabNavigation from "./TabNavigation";
-import SearchResultScreen from "../screens/search/SearchScreen";
 
 type RootStackParamList = {
   Main: undefined;
   Product: { id: string };
   Category: { id: string };
   Search: undefined;
-  SearchResult: { name: string };
+  SearchResult: undefined;
   Cart: undefined;
   Messenger: undefined;
 };

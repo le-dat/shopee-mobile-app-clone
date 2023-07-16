@@ -124,6 +124,11 @@ export const ICON_FILTER: IconIProps = {
   type: "antdesign",
 };
 
+export const ICON_RANGE: IconIProps = {
+  name: "arrows-v",
+  type: "font-awesome",
+};
+
 export const ICON_HEART = (active: boolean): IconIProps => ({
   name: active ? "heart" : "hearto",
   type: "antdesign",
@@ -146,6 +151,11 @@ export const ICON_NOTIFY = (active: boolean): IconIProps => ({
 export const ICON_PERSONAL = (active: boolean): IconIProps => ({
   name: active ? "person" : "person-outline",
   type: "ionicon",
+});
+
+export const ICON_SORT = (asc: boolean): IconIProps => ({
+  name: asc ? "arrowup" : "arrowdown",
+  type: "antdesign",
 });
 
 export const IMAGES = {
