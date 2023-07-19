@@ -1,18 +1,22 @@
-import { useScrollToTop } from "@react-navigation/native";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { RefreshControl, ScrollView, StyleProp, ViewStyle } from "react-native";
 
 interface IProps {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  stickyHeaderIndices?: number[];
   onRefresh: () => void;
   onScroll?: (e: any) => void;
 }
 
-const ScrollRefreshWrapper: React.FC<IProps> = ({ children, style, onRefresh, onScroll }) => {
-  const ref = useRef(null);
+const ScrollRefreshWrapper: React.FC<IProps> = ({
+  children,
+  style,
+  onRefresh,
+  onScroll,
+  stickyHeaderIndices,
+}) => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  useScrollToTop(ref);
 
   const handleRefresh = useCallback(() => {
     setRefreshing(true);
@@ -20,11 +24,19 @@ const ScrollRefreshWrapper: React.FC<IProps> = ({ children, style, onRefresh, on
     setRefreshing(false);
   }, []);
 
-  return (
+  return stickyHeaderIndices ? (
     <ScrollView
-      ref={ref} // scroll to top
-      // stickyHeaderIndices={[0]} // sticky header
-      onScroll={onScroll} // scroll event hide header
+      stickyHeaderIndices={stickyHeaderIndices}
+      onScroll={onScroll}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />} // scroll event refresh
+      scrollEventThrottle={16}
+      style={style}
+    >
+      {children}
+    </ScrollView>
+  ) : (
+    <ScrollView
+      onScroll={onScroll}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />} // scroll event refresh
       scrollEventThrottle={16}
       style={style}

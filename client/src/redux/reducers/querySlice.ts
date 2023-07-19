@@ -24,8 +24,14 @@ export const querySlice = createSlice({
       state.sell_number = action.payload.sell_number;
       state.price = action.payload.price;
     },
+    resetQueries: (state) => {
+      state.name = "";
+      state.createdAt = "";
+      state.sell_number = "";
+      state.price = "";
+    },
   },
 });
 
-export const { setQueries } = querySlice.actions;
+export const { setQueries, resetQueries } = querySlice.actions;
 export default querySlice.reducer;

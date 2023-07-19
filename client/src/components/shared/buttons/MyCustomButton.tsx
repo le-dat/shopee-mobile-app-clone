@@ -1,6 +1,6 @@
 import { Icon } from "@rneui/themed";
 import React from "react";
-import { StyleProp, Text, TouchableOpacity, View, ViewStyle } from "react-native";
+import { Animated, StyleProp, Text, TouchableOpacity, View, ViewStyle } from "react-native";
 
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../../constants";
@@ -13,8 +13,11 @@ interface IProps {
   badgeValue?: number;
   color?: string;
   size?: number;
-  style?: StyleProp<ViewStyle>;
+  style?: any;
+  disabled?: boolean;
 }
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
+
 const MyCustomButton: React.FC<IProps> = ({
   name,
   type,
@@ -24,31 +27,27 @@ const MyCustomButton: React.FC<IProps> = ({
   color = COLORS.white,
   size,
   style,
+  disabled = false,
 }) => {
   return (
-    <TouchableOpacity onPress={handlePress}>
-      <Icon
-        name={name}
-        type={type}
-        color={color}
-        size={size}
-        containerStyle={[styles.icon(rounded), style]}
-      />
+    <AnimatedTouchableOpacity onPress={handlePress} style={[styles.wrapper(rounded), style]}>
+      <Icon name={name} type={type} color={color} size={size} disabled={disabled} />
 
-      {/* badged */}
       {badgeValue > 0 && (
         <View style={styles.badge}>
-          <Text style={styles.text}>{badgeValue}</Text>
+          <Text style={styles.badgeText}>{badgeValue}</Text>
         </View>
       )}
-    </TouchableOpacity>
+    </AnimatedTouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create<any>({
-  icon: (rounded: boolean) => ({
-    padding: 10,
+  wrapper: (rounded: boolean) => ({
+    padding: 5,
+    backgroundColor: rounded ? COLORS.grayDark : "transparent",
     borderRadius: rounded ? 50 : 0,
+    marginHorizontal: 5,
   }),
   badge: {
     position: "absolute",
@@ -58,7 +57,7 @@ const styles = StyleSheet.create<any>({
     borderRadius: 50,
     backgroundColor: COLORS.yellow,
   },
-  text: {
+  badgeText: {
     color: COLORS.text,
   },
 });

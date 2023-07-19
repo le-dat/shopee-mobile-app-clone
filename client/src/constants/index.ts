@@ -2,7 +2,7 @@ import { IconIProps } from "../types/common";
 
 export const COLORS = {
   primary: "#ee4d2d",
-  secondary: "#d0011b",
+  secondary: "#c0c2f4",
   text: "#222",
   white: "#fff",
   yellow: "#ffd424e6",
@@ -125,8 +125,8 @@ export const ICON_FILTER: IconIProps = {
 };
 
 export const ICON_RANGE: IconIProps = {
-  name: "arrows-v",
-  type: "font-awesome",
+  name: "arrow-v",
+  type: "fontisto",
 };
 
 export const ICON_HEART = (active: boolean): IconIProps => ({

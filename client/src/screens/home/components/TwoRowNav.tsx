@@ -4,6 +4,7 @@ import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "rea
 
 import { ROUTES } from "../../../constants";
 import { CategoryIProps } from "../../../types/category";
+import MyCustomImage from "../../../components/shared/MyCustomImage";
 
 interface IProps {
   data: CategoryIProps[];
@@ -22,7 +23,7 @@ const TwoRowNav: React.FC<IProps> = ({ data }) => {
         style={styles.categoryItem}
         onPress={() => handleNavigateToItem(item?._id)}
       >
-        <Image source={{ uri: item.image }} resizeMode="contain" style={styles.categoryItemImage} />
+        <MyCustomImage url={item.image} style={styles.categoryItemImage} />
         <Text numberOfLines={2} style={styles.categoryItemText}>
           {item?.name}
         </Text>

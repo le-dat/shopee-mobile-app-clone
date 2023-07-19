@@ -10,6 +10,7 @@ export const store = configureStore({
     dialog: dialogReducer,
     query: queryReducer,
   },
+  devTools: true, // Enable Redux DevTools extension
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleProp, ViewStyle } from "react-native";
+import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 import Swiper from "react-native-swiper";
 
 interface IProps {
@@ -7,13 +7,17 @@ interface IProps {
   style?: StyleProp<ViewStyle>;
 }
 const SwiperWrapper: React.FC<IProps> = ({ children, style }) => {
-  const containerStyle = [style, { height: 150 }];
-
   return (
-    <Swiper autoplay showsButtons={true} style={containerStyle}>
+    <Swiper autoplay showsButtons={true} style={[styles.wrapper, style]}>
       {children}
     </Swiper>
   );
 };
+
+const styles = StyleSheet.create<any>({
+  wrapper: {
+    height: 220,
+  },
+});
 
 export default SwiperWrapper;

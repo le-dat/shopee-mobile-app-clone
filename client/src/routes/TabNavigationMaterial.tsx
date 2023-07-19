@@ -1,5 +1,4 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Icon } from "@rneui/themed";
 import React from "react";
 import {
@@ -12,21 +11,25 @@ import {
   TABS,
 } from "../constants";
 import HomeScreen from "../screens/home/HomeScreen";
-import LiveScreen from "../screens/live/LiveScreen";
 import MailScreen from "../screens/mail/MailScreen";
+import LiveScreen from "../screens/live/LiveScreen";
 import NotifyScreen from "../screens/notify/NotifyScreen";
 import PersonalScreen from "../screens/personal/PersonalScreen";
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
-const TabNavigation: React.FC = () => {
+const TabNavigationMaterial: React.FC = () => {
   return (
-    <Tab.Navigator initialRouteName={TABS.home}>
+    <Tab.Navigator
+      initialRouteName={TABS.home}
+      activeColor={COLORS.primary}
+      inactiveColor={COLORS.text}
+      barStyle={{ backgroundColor: COLORS.white }}
+    >
       <Tab.Screen
         name={TABS.home}
         options={{
-          headerShown: false,
-          tabBarActiveTintColor: COLORS.primary,
+          tabBarColor: COLORS.white,
           tabBarIcon: ({ focused }) => (
             <Icon {...ICON_HOME(focused)} color={focused ? COLORS.primary : COLORS.text} />
           ),
@@ -37,7 +40,7 @@ const TabNavigation: React.FC = () => {
       <Tab.Screen
         name={TABS.mail}
         options={{
-          tabBarActiveTintColor: COLORS.primary,
+          tabBarColor: COLORS.white,
           tabBarIcon: ({ focused }) => (
             <Icon {...ICON_MAIL(focused)} color={focused ? COLORS.primary : COLORS.text} />
           ),
@@ -48,7 +51,7 @@ const TabNavigation: React.FC = () => {
       <Tab.Screen
         name={TABS.live}
         options={{
-          tabBarActiveTintColor: COLORS.primary,
+          tabBarColor: COLORS.white,
           tabBarIcon: ({ focused }) => (
             <Icon {...ICON_LIVE} color={focused ? COLORS.primary : COLORS.text} />
           ),
@@ -59,7 +62,7 @@ const TabNavigation: React.FC = () => {
       <Tab.Screen
         name={TABS.notify}
         options={{
-          tabBarActiveTintColor: COLORS.primary,
+          tabBarColor: COLORS.white,
           tabBarIcon: ({ focused }) => (
             <Icon {...ICON_NOTIFY(focused)} color={focused ? COLORS.primary : COLORS.text} />
           ),
@@ -70,7 +73,7 @@ const TabNavigation: React.FC = () => {
       <Tab.Screen
         name={TABS.personal}
         options={{
-          tabBarActiveTintColor: COLORS.primary,
+          tabBarColor: COLORS.white,
           tabBarIcon: ({ focused }) => (
             <Icon {...ICON_PERSONAL(focused)} color={focused ? COLORS.primary : COLORS.text} />
           ),
@@ -81,4 +84,4 @@ const TabNavigation: React.FC = () => {
   );
 };
 
-export default TabNavigation;
+export default TabNavigationMaterial;

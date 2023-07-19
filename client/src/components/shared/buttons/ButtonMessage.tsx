@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
-import { ICON_BACK } from "../../../constants";
+import { ICON_MESSAGE, ROUTES } from "../../../constants";
 import MyCustomButton from "./MyCustomButton";
 
 interface IProps {
@@ -9,18 +9,20 @@ interface IProps {
   rounded?: boolean;
   style?: any;
 }
-const ButtonBack: React.FC<IProps> = ({ color, rounded, style }) => {
+const ButtonMessage: React.FC<IProps> = ({ color, rounded, style }) => {
+  const message = 0;
   const navigation = useNavigation<any>();
 
   return (
     <MyCustomButton
-      {...ICON_BACK}
-      handlePress={() => navigation.goBack()}
-      color={color}
+      {...ICON_MESSAGE}
+      handlePress={() => navigation.navigate(ROUTES.message)}
       style={style}
+      color={color}
+      badgeValue={message}
       rounded={rounded}
     />
   );
 };
 
-export default ButtonBack;
+export default ButtonMessage;

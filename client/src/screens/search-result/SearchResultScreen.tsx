@@ -9,11 +9,12 @@ import SearchUI from "../../components/shared/SearchUI";
 import MyCustomButton from "../../components/shared/buttons/MyCustomButton";
 import ListCardVertical from "../../components/shared/card/ListCardVertical";
 import FontWrapper from "../../components/wrapper/FontWrapper";
-import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
+// import HeaderBackgroundOpacity from "../../components/animated/HeaderBackgroundAnimation";
 import ScrollRefreshWrapper from "../../components/wrapper/ScrollRefreshWrapper";
 import { COLORS, ICON_BACK, ICON_FILTER } from "../../constants";
 import { useAppSelector } from "../../hooks/useRedux";
 import filterProduct from "../../services/product/filterProduct";
+import FilterModal from "./components/FilterModal";
 
 const SearchResultScreen: React.FC = () => {
   const { name, createdAt, sell_number, price } = useAppSelector((state) => state.query);
@@ -25,7 +26,7 @@ const SearchResultScreen: React.FC = () => {
     // queryFn: () => searchProductByName(name),
   });
 
-  if (!data || isError) return <Error handlePress={refetch} />;
+  if (isError) return <Error handlePress={refetch} />;
 
   const handleFilter = () => {
     console.log("handleFilter");
@@ -33,7 +34,7 @@ const SearchResultScreen: React.FC = () => {
 
   return (
     <FontWrapper>
-      <HeaderWrapper style={styles.header}>
+      {/* <HeaderBackgroundOpacity style={styles.header}>
         <MyCustomButton
           {...ICON_BACK}
           handlePress={() => navigation.goBack()}
@@ -41,9 +42,10 @@ const SearchResultScreen: React.FC = () => {
         />
         <SearchUI placeholder={name} />
         <MyCustomButton {...ICON_FILTER} handlePress={handleFilter} color={COLORS.text} />
-      </HeaderWrapper>
+      </HeaderBackgroundOpacity> */}
 
       <Filter />
+      <FilterModal />
 
       <ScrollRefreshWrapper onRefresh={refetch} style={styles.container}>
         {/* items */}

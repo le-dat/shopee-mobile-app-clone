@@ -1,30 +1,47 @@
 import { useRoute } from "@react-navigation/native";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useRef } from "react";
+import { Animated, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
+
+import { Tab, TabView } from "@rneui/themed";
 import Error from "../../components/shared/Error";
 import MyCustomImage from "../../components/shared/MyCustomImage";
 import SearchUI from "../../components/shared/SearchUI";
 import ButtonBack from "../../components/shared/buttons/ButtonBack";
-import ButtonCart from "../../components/shared/buttons/ButtonCart";
 import ButtonThreeDot from "../../components/shared/buttons/ButtonThreeDot";
 import ListCardVertical from "../../components/shared/card/ListCardVertical";
 import FontWrapper from "../../components/wrapper/FontWrapper";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import ScrollRefreshWrapper from "../../components/wrapper/ScrollRefreshWrapper";
 import { COLORS } from "../../constants";
-import useIsScroll from "../../hooks/useIsScroll";
 import getCategoryById from "../../services/category/getCategoryById";
 
 interface RouteParams {
   id: string;
 }
+interface LayoutIProps {
+  children: React.ReactNode;
+}
 
 const CategoryScreen: React.FC = () => {
   const router = useRoute();
+  const [index, setIndex] = React.useState(0);
   const { id } = router.params as RouteParams;
-  const { isScroll, handleScroll } = useIsScroll();
+  const animatedValue = useRef(new Animated.Value(0)).current;
+
+  const handleScroll = (e: any) => {
+    const offsetY = e.nativeEvent.contentOffset.y;
+    animatedValue.setValue(offsetY);
+  };
+
+  const headerAnimation = {
+    opacity: animatedValue.interpolate({
+      inputRange: [0, 50],
+      outputRange: [1, 0],
+      extrapolate: "clamp",
+    }),
+  };
 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: [`category-${id}`],
@@ -35,23 +52,29 @@ const CategoryScreen: React.FC = () => {
   if (!data || isError) return <Error handlePress={refetch} />;
 
   return (
-    <FontWrapper>
-      <HeaderWrapper isScroll={isScroll}>
+    <FontWrapper style={styles.wrapper}>
+      <HeaderWrapper>
         <ButtonBack />
-        <SearchUI placeholder="Tìm kiếm trong danh mục" />
-        <View style={{ flexDirection: "row" }}>
-          <ButtonCart />
-          <ButtonThreeDot />
-        </View>
+        <SearchUI
+          placeholder={`Tìm kiếm trong ${data?.name}...`}
+          style={styles.input}
+          styleText={styles.inputText}
+        />
+        <ButtonThreeDot />
       </HeaderWrapper>
 
+      <SafeAreaView>
+        <View style={styles.upperHeaderPlaceholder} />
+      </SafeAreaView>
+
       <ScrollRefreshWrapper
-        onScroll={handleScroll}
+        onScroll={(e) => handleScroll(e)}
         onRefresh={refetch}
-        style={{ backgroundColor: COLORS.gray }}
+        stickyHeaderIndices={[1]}
+        style={{ backgroundColor: COLORS.secondary }}
       >
-        {/* introduce */}
-        <View style={styles.category}>
+        {/* Header */}
+        <Animated.View style={[headerAnimation, styles.category]}>
           <View style={styles.categoryImageWrapper}>
             <MyCustomImage url={data?.image} style={styles.categoryImage} />
           </View>
@@ -61,25 +84,73 @@ const CategoryScreen: React.FC = () => {
           <View style={styles.categoryImageWrapper}>
             <MyCustomImage url={data?.image} style={styles.categoryImage} />
           </View>
-        </View>
+        </Animated.View>
 
-        {/* items */}
-        <ListCardVertical products={data.products} />
+        <Tab
+          value={index}
+          onChange={(e) => setIndex(e)}
+          indicatorStyle={{
+            backgroundColor: COLORS.primary,
+            height: 3,
+          }}
+          style={styles.tabs}
+        >
+          <Tab.Item title="Shop" titleStyle={(active) => styles.tabTitle(active)} />
+          <Tab.Item title="Sản phẩm" titleStyle={(active) => styles.tabTitle(active)} />
+          <Tab.Item title="Danh mục" titleStyle={(active) => styles.tabTitle(active)} />
+        </Tab>
+
+        <TabView
+          value={index}
+          onChange={setIndex}
+          animationType="spring"
+          containerStyle={{ minHeight: 1000, flex: 1, zIndex: 1 }}
+        >
+          <TabView.Item>
+            <ListCardVertical products={data?.products} />
+          </TabView.Item>
+          <TabView.Item>
+            <ListCardVertical products={data?.products} />
+          </TabView.Item>
+          <TabView.Item>
+            <Text>Danh muc</Text>
+          </TabView.Item>
+        </TabView>
       </ScrollRefreshWrapper>
     </FontWrapper>
   );
 };
 
 const styles = StyleSheet.create<any>({
-  wrapper: {},
+  wrapper: {
+    backgroundColor: COLORS.secondary,
+  },
+  featureIcon: {
+    position: "absolute",
+    top: 0,
+  },
+  input: {
+    backgroundColor: COLORS.gray,
+  },
+  inputText: {
+    color: COLORS.text,
+  },
+  upperHeaderPlaceholder: {
+    height: 80,
+  },
+  tabs: {
+    backgroundColor: COLORS.white,
+  },
+  tabTitle: (active: boolean) => ({
+    color: active ? COLORS.primary : COLORS.text,
+  }),
   category: {
-    backgroundColor: COLORS.primary,
     padding: 14,
+    width: "100%",
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    flexDirection: "row",
     gap: 20,
-    marginBottom: 20,
   },
   categoryImageWrapper: {
     width: 50,

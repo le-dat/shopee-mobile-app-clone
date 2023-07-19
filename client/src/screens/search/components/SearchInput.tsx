@@ -62,6 +62,7 @@ const SearchInput: React.FC<IProps> = ({ placeholder = "Nhập từ khóa..." })
         handlePress={handleNavigationToSearchResult}
         color={COLORS.white}
         style={styles.iconSearch}
+        size={20}
       />
     </View>
   );
@@ -72,12 +73,13 @@ const styles = StyleSheet.create<any>({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: COLORS.primary,
   },
   inputWrapper: {
     flex: 1,
+    borderWidth: 1,
+    borderColor: COLORS.primary,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
   },
   input: {
     alignItems: "center",
@@ -90,9 +92,13 @@ const styles = StyleSheet.create<any>({
     paddingRight: 10,
   },
   iconSearch: {
+    padding: 10,
+    marginHorizontal: 0,
     borderWidth: 1,
     borderColor: COLORS.primary,
     backgroundColor: COLORS.primary,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
   },
 });
 

@@ -12,7 +12,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "redux": "yarn run react-native-debugger"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.8",
@@ -36,6 +37,7 @@
     "react-native": "0.71.8",
     "react-native-config": "^1.5.1",
     "react-native-fast-image": "^8.6.3",
+    "react-native-gesture-handler": "~2.9.0",
     "react-native-loading-spinner-overlay": "^3.0.1",
     "react-native-paper": "^5.9.0",
     "react-native-progress": "^5.0.0",
@@ -61,6 +63,7 @@
     "eslint-plugin-react": "^7.32.2",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
+    "redux-devtools-extension": "^2.13.9",
     "typescript": "^4.9.4"
   },
   "private": true

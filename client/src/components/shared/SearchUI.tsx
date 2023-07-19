@@ -1,15 +1,16 @@
 import { useNavigation } from "@react-navigation/native";
-import { Text } from "@rneui/themed";
+import { Icon, Text } from "@rneui/themed";
 import React from "react";
-import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { Animated, StyleSheet, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
 
 import { COLORS, ICON_SEARCH, ROUTES } from "../../constants";
-import MyCustomButton from "./buttons/MyCustomButton";
 
 interface IProps {
   placeholder?: string;
+  styleText?: ViewStyle;
+  style?: any;
 }
-const SearchUI: React.FC<IProps> = ({ placeholder = "Nhập từ khóa..." }) => {
+const SearchUI: React.FC<IProps> = ({ placeholder = "Nhập từ khóa...", styleText, style }) => {
   const navigation = useNavigation<any>();
 
   const handlePress = () => {
@@ -18,16 +19,10 @@ const SearchUI: React.FC<IProps> = ({ placeholder = "Nhập từ khóa..." }) =>
 
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
-      <View style={styles.button}>
-        <MyCustomButton
-          {...ICON_SEARCH}
-          handlePress={() => console.log("ICON_SEARCH")}
-          color={COLORS.text}
-          size={20}
-          style={{ paddingLeft: 10, paddingRight: 0 }}
-        />
-        <Text>{placeholder}</Text>
-      </View>
+      <Animated.View style={[styles.button, style]}>
+        <Icon {...ICON_SEARCH} color={COLORS.text} size={20} />
+        <Text style={styleText}>{placeholder}</Text>
+      </Animated.View>
     </TouchableWithoutFeedback>
   );
 };
@@ -41,10 +36,11 @@ const styles = StyleSheet.create<any>({
     alignItems: "center",
     justifyContent: "flex-start",
     gap: 10,
-    backgroundColor: COLORS.white,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: COLORS.primary,
+    borderColor: COLORS.gray,
+    backgroundColor: COLORS.white,
+    padding: 10,
   },
 });
 

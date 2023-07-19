@@ -16,6 +16,16 @@ const styles = StyleSheet.create<any>({
     height: "100%",
     flex: 1,
   },
+  current: {
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: COLORS.gray,
+    borderRadius: 50,
+    zIndex: 1,
+  },
   categoryList: {
     padding: 10,
     flexDirection: "row",

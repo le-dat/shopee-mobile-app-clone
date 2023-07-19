@@ -1,18 +1,19 @@
 import { useNavigation } from "@react-navigation/native";
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React from "react";
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import Error from "../../components/shared/Error";
 import MyCustomButton from "../../components/shared/buttons/MyCustomButton";
 import FontWrapper from "../../components/wrapper/FontWrapper";
+// import HeaderBackgroundOpacity from "../../components/animated/HeaderBackgroundAnimation";
 import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
 import ScrollRefreshWrapper from "../../components/wrapper/ScrollRefreshWrapper";
 import { COLORS, ICON_BACK, ROUTES } from "../../constants";
+import { useAppSelector } from "../../hooks/useRedux";
 import getCategories from "../../services/category/getCategories";
 import searchCategoryByName from "../../services/category/searchCategoryByName";
 import SearchInput from "./components/SearchInput";
-import { useAppSelector } from "../../hooks/useRedux";
 
 const SearchScreen: React.FC = () => {
   const navigation = useNavigation<any>();

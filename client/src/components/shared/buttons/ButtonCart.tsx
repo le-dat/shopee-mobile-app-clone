@@ -5,7 +5,12 @@ import { ICON_CART, ROUTES } from "../../../constants";
 import { useAppSelector } from "../../../hooks/useRedux";
 import MyCustomButton from "./MyCustomButton";
 
-const ButtonCart: React.FC = () => {
+interface IProps {
+  color?: string;
+  rounded?: boolean;
+  style?: any;
+}
+const ButtonCart: React.FC<IProps> = ({ color, rounded, style }) => {
   const products = useAppSelector((state) => state.cart.products);
   const navigation = useNavigation<any>();
 
@@ -14,6 +19,9 @@ const ButtonCart: React.FC = () => {
       {...ICON_CART}
       badgeValue={products.length}
       handlePress={() => navigation.navigate(ROUTES.cart)}
+      color={color}
+      style={style}
+      rounded={rounded}
     />
   );
 };

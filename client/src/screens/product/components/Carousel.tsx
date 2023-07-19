@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 
-import { Image } from "react-native";
+import { Text } from "react-native";
+import MyCustomImage from "../../../components/shared/MyCustomImage";
 import styles from "./Carousel.style";
 
 interface IProps {
@@ -12,22 +13,22 @@ const Carousel: React.FC<IProps> = ({ data }) => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (active < data.length - 1) {
-        setActive(active + 1);
-      } else {
-        setActive(0);
-      }
-    }, 4200); // Set the timeout duration (in milliseconds)
+      const checkIdx = active < data.length - 1;
+      setActive(checkIdx ? active + 1 : 0);
+    }, 4200);
 
-    return () => {
-      clearTimeout(timeout); // Clear the timeout when the component unmounts
-    };
+    return () => clearTimeout(timeout);
   }, [active, data]);
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.imageWrapper}>
-        <Image source={{ uri: data?.[active] }} resizeMode="contain" style={styles.image} />
+        <MyCustomImage url={data?.[active]} style={styles.image} />
+        <View style={styles.current}>
+          <Text>
+            {active + 1}/{data.length + 1}
+          </Text>
+        </View>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryList}>
         {data?.map((item, index) => (
@@ -36,11 +37,7 @@ const Carousel: React.FC<IProps> = ({ data }) => {
             style={styles.categoryItem(active === index)}
             onPress={() => setActive(index)}
           >
-            <Image
-              source={{ uri: data?.[index] }}
-              resizeMode="contain"
-              style={styles.categoryItemImage}
-            />
+            <MyCustomImage url={data?.[index]} style={styles.categoryItemImage} />
           </TouchableOpacity>
         ))}
       </ScrollView>
