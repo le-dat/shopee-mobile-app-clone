@@ -29,3 +29,12 @@
 ### Search screen
 
 <img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot6.jpg" alt="shopee screenshot" width="150" height="whatever">
+
+### Filter in Search screen
+
+<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot6.jpg" alt="shopee screenshot" width="150" height="whatever">
+
+### Recommend:
+
+- Node version > 18.0.0
+- Yarn
