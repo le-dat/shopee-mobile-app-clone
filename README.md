@@ -32,7 +32,7 @@
 
 ### Filter in Search screen
 
-<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot6.jpg" alt="shopee screenshot" width="150" height="whatever">
+<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot7.jpg" alt="shopee screenshot" width="150" height="whatever">
 
 ### Recommend:
 
