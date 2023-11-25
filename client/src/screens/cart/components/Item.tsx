@@ -51,6 +51,7 @@ const Item: React.FC<IProps> = ({ product, style }) => {
         iconType="material-community"
         checkedIcon="checkbox-outline"
         uncheckedIcon={"checkbox-blank-outline"}
+        containerStyle={styles.checkbox}
       />
 
       <TouchableOpacity style={styles.imageWrapper} onPress={handleNavigateItemScreen}>
@@ -90,6 +91,10 @@ const styles = StyleSheet.create<any>({
     gap: 10,
     backgroundColor: COLORS.white,
     padding: 10,
+  },
+  checkbox: {
+    margin: 0,
+    padding: 0,
   },
   imageWrapper: {
     width: 100,
