@@ -25,3 +25,7 @@
 ### Cart screen
 
 <img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot5.jpg" alt="shopee screenshot" width="150" height="whatever">
+
+### Search screen
+
+<img src="https://github.com/le-dat/shopee-mobile-app-clone/blob/master/static/screenshot6.jpg" alt="shopee screenshot" width="150" height="whatever">

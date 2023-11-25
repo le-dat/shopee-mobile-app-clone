@@ -9,12 +9,13 @@ import SearchUI from "../../components/shared/SearchUI";
 import MyCustomButton from "../../components/shared/buttons/MyCustomButton";
 import ListCardVertical from "../../components/shared/card/ListCardVertical";
 import FontWrapper from "../../components/wrapper/FontWrapper";
-// import HeaderBackgroundOpacity from "../../components/animated/HeaderBackgroundAnimation";
 import ScrollRefreshWrapper from "../../components/wrapper/ScrollRefreshWrapper";
 import { COLORS, ICON_BACK, ICON_FILTER } from "../../constants";
 import { useAppSelector } from "../../hooks/useRedux";
 import filterProduct from "../../services/product/filterProduct";
 import FilterModal from "./components/FilterModal";
+import HeaderWrapper from "../../components/wrapper/HeaderWrapper";
+import { View } from "native-base";
 
 const SearchResultScreen: React.FC = () => {
   const { name, createdAt, sell_number, price } = useAppSelector((state) => state.query);
@@ -34,7 +35,7 @@ const SearchResultScreen: React.FC = () => {
 
   return (
     <FontWrapper>
-      {/* <HeaderBackgroundOpacity style={styles.header}>
+      <HeaderWrapper style={styles.header}>
         <MyCustomButton
           {...ICON_BACK}
           handlePress={() => navigation.goBack()}
@@ -42,21 +43,23 @@ const SearchResultScreen: React.FC = () => {
         />
         <SearchUI placeholder={name} />
         <MyCustomButton {...ICON_FILTER} handlePress={handleFilter} color={COLORS.text} />
-      </HeaderBackgroundOpacity> */}
+      </HeaderWrapper>
 
-      <Filter />
-      <FilterModal />
+      <View style={{ marginTop: 85 }}>
+        <Filter />
+        <FilterModal />
 
-      <ScrollRefreshWrapper onRefresh={refetch} style={styles.container}>
-        {/* items */}
-        {isLoading ? (
-          <ActivityIndicator size="large" />
-        ) : data.length === 0 ? (
-          <Text style={[styles.empty]}>No results found</Text>
-        ) : (
-          <ListCardVertical products={data} />
-        )}
-      </ScrollRefreshWrapper>
+        <ScrollRefreshWrapper onRefresh={refetch} style={styles.container}>
+          {/* items */}
+          {isLoading ? (
+            <ActivityIndicator size="large" />
+          ) : data.length === 0 ? (
+            <Text style={[styles.empty]}>No results found</Text>
+          ) : (
+            <ListCardVertical products={data} />
+          )}
+        </ScrollRefreshWrapper>
+      </View>
     </FontWrapper>
   );
 };
