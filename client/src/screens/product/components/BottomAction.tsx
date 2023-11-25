@@ -3,15 +3,21 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import BottomWrapper from "../../../components/wrapper/BottomWrapper";
-import { COLORS, ICON_CART, ICON_MESSAGE } from "../../../constants";
+import { COLORS, ICON_CART, ICON_MESSAGE, ROUTES } from "../../../constants";
 import { ProductIProps } from "../../../types/product";
 import SheetAddProduct from "./SheetAddProduct";
+import { useNavigation } from "@react-navigation/native";
 
 interface IProps {
   product: ProductIProps;
 }
 const BottomAction: React.FC<IProps> = ({ product }) => {
+  const navigation = useNavigation<any>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleMessage = () => {
+    navigation.navigate(ROUTES.message);
+  };
 
   const handleOpenSheet = () => {
     setIsOpen(true);
@@ -22,7 +28,7 @@ const BottomAction: React.FC<IProps> = ({ product }) => {
 
   return (
     <BottomWrapper style={styles.wrapper}>
-      <TouchableOpacity style={[styles.button, styles.buttonCart]} onPress={handleOpenSheet}>
+      <TouchableOpacity style={[styles.button, styles.buttonCart]} onPress={handleMessage}>
         <Icon {...ICON_MESSAGE} color={COLORS.white} style={{ padding: 0 }} />
         <Text style={styles.text}>Chat ngay</Text>
       </TouchableOpacity>
