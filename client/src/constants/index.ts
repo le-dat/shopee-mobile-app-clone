@@ -162,3 +162,6 @@ export const IMAGES = {
   empty: require("../assets/images/empty.png"),
 };
 export const API_URL = "https://shopee-mobile-app-clone-server.onrender.com";
+
+// not working on react native
+// export const API_URL = "http://localhost:5000";
