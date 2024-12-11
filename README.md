@@ -71,6 +71,15 @@ This project is a mobile application clone of Shopee, built using **React Native
 
 0.1.0
 
+
 ## Author
 
-Le Quoc Dat. See the [Website Portfolio](https://ledat-portfolio.vercel.app/) for details.
+### Le Quoc Dat
+
+Passionate software developer with a knack for creating efficient and user-friendly applications. Dedicated to continuous learning and improvement, always exploring new technologies and methodologies.
+
+- **Portfolio:** [Website Portfolio](https://ledat-portfolio.vercel.app/)
+- **GitHub:** [Le Quoc Dat](https://github.com/le-dat)
+- **LinkedIn:** [Le Quoc Dat](https://www.linkedin.com/in/le-quoc-dat)
+
+Feel free to reach out for collaboration or any inquiries!
