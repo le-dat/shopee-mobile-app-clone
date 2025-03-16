@@ -37,7 +37,7 @@
     "react-native": "0.73.0",
     "react-native-config": "^1.5.1",
     "react-native-fast-image": "^8.6.3",
-    "react-native-gesture-handler": "~2.9.0",
+    "react-native-gesture-handler": "~2.14.0",
     "react-native-loading-spinner-overlay": "^3.0.1",
     "react-native-paper": "^5.9.0",
     "react-native-progress": "^5.0.0",
