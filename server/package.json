@@ -22,7 +22,7 @@
     "mongoose-delete": "^1.0.1",
     "mongoose-slug-generator": "^1.0.4",
     "slugify": "^1.6.6",
-    "yarn": "^1.22.19",
+    "yarn": "^1.22.22",
     "zingmp3-api-full": "^1.0.14"
   },
   "devDependencies": {
